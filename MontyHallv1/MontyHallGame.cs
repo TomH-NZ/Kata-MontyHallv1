@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace MontyHallv1
@@ -15,6 +16,11 @@ namespace MontyHallv1
             PlayerSelection = playerSelection;
         }
 
-        public string PlayerSelection { get; set; }
+        public string PlayerSelection { get; }
+
+        public string AssignPrize(string selectedDoor)
+        {
+            return selectedDoor == "one" ? "joke" : selectedDoor == "two" ? "serious" : "joke";
+        }
     }
 }

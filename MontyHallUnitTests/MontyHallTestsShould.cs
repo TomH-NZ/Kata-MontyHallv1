@@ -8,7 +8,7 @@ namespace MontyHallUnitTests
     public class UnitTest1
     {
         [Fact]
-        public void TestGeneratingThreeDoors()
+        public void ShowThreeDoorsWhenAGameIsCreated()
         {
             //Arrange
             var MontyHallGame = new MontyHallGame();
@@ -21,7 +21,7 @@ namespace MontyHallUnitTests
         }
 
         [Fact]
-        public void TestingDoorConstructor()
+        public void DisplayAUserSelectionWhenAGameIsCreated()
         {
             //Arrange
             var MontyHallGame = new MontyHallGame("one");
@@ -32,7 +32,23 @@ namespace MontyHallUnitTests
 
             //Assert
             Assert.Equal(expected, result);
+        }
 
+        [Theory]
+        [InlineData("one", "joke")]
+        [InlineData("two", "serious")]
+        [InlineData("three", "joke")]
+        public void ShowAPrizeWhenADoorIsSelected(string door, string prize)
+        {
+            //Arrange
+            var MontyHallGame = new MontyHallGame();
+            
+            //Act
+            var result = MontyHallGame.AssignPrize(door);
+            //var expected = prize;
+
+            //Assert
+            Assert.Equal(prize, result);
         }
     }
 }
