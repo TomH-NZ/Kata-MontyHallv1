@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using MontyHallv1;
 using Xunit;
 
@@ -11,10 +9,10 @@ namespace MontyHallUnitTests
         public void ShowThreeDoorsWhenAGameIsCreated()
         {
             //Arrange
-            var MontyHallGame = new MontyHallGame();
+            var montyHallGame = new MontyHallGame();
             
             //Act
-            var actual = MontyHallGame.Doors.Count;
+            var actual = montyHallGame.Doors.Count;
 
             //Assert
             Assert.Equal(3, actual);
@@ -24,10 +22,10 @@ namespace MontyHallUnitTests
         public void DisplayAUserSelectionWhenAGameIsCreated()
         {
             //Arrange
-            var MontyHallGame = new MontyHallGame("one");
+            var montyHallGame = new MontyHallGame("one");
             
             //Act
-            var result = MontyHallGame.PlayerSelection;
+            var result = montyHallGame.PlayerSelection;
             var expected = "one";
 
             //Assert
@@ -41,11 +39,10 @@ namespace MontyHallUnitTests
         public void ShowAPrizeWhenADoorIsSelected(string door, string prize)
         {
             //Arrange
-            var MontyHallGame = new MontyHallGame();
+            var montyHallGame = new MontyHallGame();
             
             //Act
-            var result = MontyHallGame.AssignPrize(door);
-            //var expected = prize;
+            var result = montyHallGame.AssignPrizeToDoor(door);
 
             //Assert
             Assert.Equal(prize, result);
