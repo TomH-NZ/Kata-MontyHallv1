@@ -42,10 +42,31 @@ namespace MontyHallUnitTests
             var montyHallGame = new MontyHallGame();
             
             //Act
-            var result = montyHallGame.AssignPrizeToDoor(door);
+            var result = montyHallGame.AssignFixedPrizeToDoor(door);
+
+            //Assert
+            Assert.Equal(prize, result);
+        }
+
+        [Theory]
+        [InlineData("one", "three", "joke")]
+        [InlineData("two", "two", "serious")]
+        [InlineData("three", "one", "joke")]
+        [InlineData("one", "one", "serious")]
+        public void ReturnARandomDoorWithAPrize(string door, string randomDoor ,string prize)
+        {
+            //Arrange
+            var montyHallGame = new MontyHallGame();
+            IRandomPrizeDoor random = new RandomDoor();
+            //RandomDoor random2 = new RandomDoor();
+            
+            //Act
+            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
 
             //Assert
             Assert.Equal(prize, result);
         }
     }
 }
+//manually create test double (stub, fake, mock, etc)
+// https://github.com/MYOB-Technology/General_Developer/blob/main/things-we-value/technical/testing/test-doubles.md

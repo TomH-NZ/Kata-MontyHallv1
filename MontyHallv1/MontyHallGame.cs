@@ -18,28 +18,25 @@ namespace MontyHallv1
 
         public string PlayerSelection { get; }
 
-        public string AssignPrizeToDoor(string selectedDoor)
+        public string AssignFixedPrizeToDoor(string selectedDoor)
         {
             return selectedDoor == "two" ? "serious" : "joke";
         }
 
-        public string AssignPrizeToRandomDoor(string selectedDoor)
+        public string AssignRandomPrizeToDoor(string selectedDoor, IRandomPrizeDoor prizeDoor)
         {
-            var rnd = new Random();
-            //var randomDoor = rnd.Next(1, 4);
+            //var prizeDoor = MontyHallv1.RandomDoor.RandomDoor();
+            var convertedDoor = prizeDoor.RandomPrizeDoor();
 
-            var prizeDoor = rnd.Next(1, 4) switch
-            {
-                1 => "one",
-                2 => "two",
-                3 => "three",
-                _ => "Not Implemented"
-            };
-
-            return selectedDoor == prizeDoor ? "serious" : "joke";
+            return selectedDoor == convertedDoor ? "serious" : "joke";
         }
     }
 }
 
-// TODO: For the AssignPrizeToDoor method, possible logic:  assign "joke" to all three doors, have a random number assign "serious" to one door.
+// TODO: For the AssignFixedPrizeToDoor method, possible logic:  assign "joke" to all three doors, have a random number assign "serious" to one door.
 // Possible issues include not being able to test for specific doors. 
+
+//var rnd = new Random();
+//var randomDoor = rnd.Next(1, 4);
+
+//var prizeDoor = rnd.Next(1, 4) switch
