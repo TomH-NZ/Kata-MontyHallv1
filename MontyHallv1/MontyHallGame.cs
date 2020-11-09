@@ -32,3 +32,6 @@ namespace MontyHallv1
         }
     }
 }
+
+// TODO: For the AssignPrize class, possible logic:  assign "joke" to all three doors, have a random number assign "serious" to one door.
+// Possible issues include not being able to test for specific doors. 
