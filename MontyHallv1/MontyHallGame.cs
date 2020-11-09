@@ -20,7 +20,15 @@ namespace MontyHallv1
 
         public string AssignPrize(string selectedDoor)
         {
-            return selectedDoor == "one" ? "joke" : selectedDoor == "two" ? "serious" : "joke";
+            //return selectedDoor == "one" ? "joke" : selectedDoor == "two" ? "serious" : "joke";
+
+            return selectedDoor switch
+            {
+                "one" => "joke",
+                "two" => "serious",
+                "three" => "joke",
+                _ => "joke"
+            };
         }
     }
 }
