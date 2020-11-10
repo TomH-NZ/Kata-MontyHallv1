@@ -36,7 +36,7 @@ namespace MontyHallUnitTests
         [InlineData("one", "joke")]
         [InlineData("two", "serious")]
         [InlineData("three", "joke")]
-        public void ShowAPrizeWhenADoorIsSelected(string door, string prize)
+        public void ShowAPrizeWhenDoorTwoIsSelected(string door, string prize)
         {
             //Arrange
             var montyHallGame = new MontyHallGame();
@@ -48,7 +48,7 @@ namespace MontyHallUnitTests
             Assert.Equal(prize, result);
         }
 
-        class RandomDoorStub : IRandomPrizeDoor
+        class RandomDoorStubDoorOne : IRandomPrizeDoor
         {
             public string RandomPrizeDoor()
             {
@@ -60,11 +60,36 @@ namespace MontyHallUnitTests
         [InlineData("one", "serious")]
         [InlineData("two", "joke")]
         [InlineData("three", "joke")]
-        public void ReturnARandomDoorWithAPrize(string door, string prize)
+        public void ShowAPrizeWhenDoorOneIsSelectedWithStub(string door, string prize)
         {
             //Arrange
             var montyHallGame = new MontyHallGame();
-            IRandomPrizeDoor random = new RandomDoorStub();
+            IRandomPrizeDoor random = new RandomDoorStubDoorOne();
+            
+            //Act
+            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
+
+            //Assert
+            Assert.Equal(prize, result);
+        }
+        
+        class RandomDoorStubDoorThree : IRandomPrizeDoor
+        {
+            public string RandomPrizeDoor()
+            {
+                return "three";
+            }
+        }
+        
+        [Theory]
+        [InlineData("one", "joke")]
+        [InlineData("two", "joke")]
+        [InlineData("three", "serious")]
+        public void ShowAPrizeWhenDoorThreeIsSelectedWithStub(string door, string prize)
+        {
+            //Arrange
+            var montyHallGame = new MontyHallGame();
+            IRandomPrizeDoor random = new RandomDoorStubDoorThree();
             
             //Act
             var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
@@ -74,5 +99,3 @@ namespace MontyHallUnitTests
         }
     }
 }
-//manually create test double (stub, fake, mock, etc)
-// https://github.com/MYOB-Technology/General_Developer/blob/main/things-we-value/technical/testing/test-doubles.md

@@ -31,8 +31,3 @@ namespace MontyHallv1
         }
     }
 }
-
-//var rnd = new Random();
-//var randomDoor = rnd.Next(1, 4);
-
-//var prizeDoor = rnd.Next(1, 4) switch
