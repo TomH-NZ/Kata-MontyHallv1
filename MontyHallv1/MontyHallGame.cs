@@ -18,11 +18,6 @@ namespace MontyHallv1
 
         public string PlayerSelection { get; }
 
-        public string AssignFixedPrizeToDoor(string selectedDoor)
-        {
-            return selectedDoor == "two" ? "serious" : "joke";
-        }
-
         public string AssignRandomPrizeToDoor(string selectedDoor, IRandomPrizeDoor prizeDoor)
         {
             var convertedDoor = prizeDoor.RandomPrizeDoor();

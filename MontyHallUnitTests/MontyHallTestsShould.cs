@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using MontyHallv1;
 using Xunit;
 
@@ -32,22 +35,6 @@ namespace MontyHallUnitTests
             Assert.Equal(expected, result);
         }
 
-        [Theory]
-        [InlineData("one", "joke")]
-        [InlineData("two", "serious")]
-        [InlineData("three", "joke")]
-        public void ShowAPrizeWhenDoorTwoIsSelected(string door, string prize)
-        {
-            //Arrange
-            var montyHallGame = new MontyHallGame();
-            
-            //Act
-            var result = montyHallGame.AssignFixedPrizeToDoor(door);
-
-            //Assert
-            Assert.Equal(prize, result);
-        }
-
         class RandomDoorStubDoorOne : IRandomPrizeDoor
         {
             public string RandomPrizeDoor()
@@ -65,6 +52,31 @@ namespace MontyHallUnitTests
             //Arrange
             var montyHallGame = new MontyHallGame();
             IRandomPrizeDoor random = new RandomDoorStubDoorOne();
+            
+            //Act
+            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
+
+            //Assert
+            Assert.Equal(prize, result);
+        }
+
+        class RandomDoorStubDoorTwo : IRandomPrizeDoor
+        {
+            public string RandomPrizeDoor()
+            {
+                return "two";
+            }
+        }
+        
+        [Theory]
+        [InlineData("one", "joke")]
+        [InlineData("two", "serious")]
+        [InlineData("three", "joke")]
+        public void ShowAPrizeWhenDoorTwoIsSelectedWithStub(string door, string prize)
+        {
+            //Arrange
+            var montyHallGame = new MontyHallGame();
+            IRandomPrizeDoor random = new RandomDoorStubDoorTwo();
             
             //Act
             var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
@@ -97,5 +109,43 @@ namespace MontyHallUnitTests
             //Assert
             Assert.Equal(prize, result);
         }
+        
+        public static IEnumerable<object[]> TestMember()
+        {
+            var stubOne = new RandomDoorStubDoorOne();
+            var StubTwo = new RandomDoorStubDoorTwo();
+            var stubThree = new RandomDoorStubDoorThree();
+            
+            return new List<object[]>
+            {
+                new object[]{"one", "serious", stubOne },
+                new object[]{"two", "joke", stubOne},
+                new object[]{"three", "joke", stubOne},
+                
+                new object[]{"one", "joke", StubTwo },
+                new object[]{"two", "serious", StubTwo},
+                new object[]{"three", "joke", StubTwo},
+                
+                new object[]{"one", "joke", stubThree },
+                new object[]{"two", "joke", stubThree},
+                new object[]{"three", "serious", stubThree}
+            };
+        }
+        
+        [Theory]
+        [MemberData(nameof(TestMember))]
+        public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(string door, string prize, IRandomPrizeDoor random)
+        {
+            //Arrange
+            var montyHallGame = new MontyHallGame();
+
+            //Act
+            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
+
+            //Assert
+            Assert.Equal(prize, result);
+        }
+
+        
     }
 }
