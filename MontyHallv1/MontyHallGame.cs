@@ -25,16 +25,12 @@ namespace MontyHallv1
 
         public string AssignRandomPrizeToDoor(string selectedDoor, IRandomPrizeDoor prizeDoor)
         {
-            //var prizeDoor = MontyHallv1.RandomDoor.RandomDoor();
             var convertedDoor = prizeDoor.RandomPrizeDoor();
 
             return selectedDoor == convertedDoor ? "serious" : "joke";
         }
     }
 }
-
-// TODO: For the AssignFixedPrizeToDoor method, possible logic:  assign "joke" to all three doors, have a random number assign "serious" to one door.
-// Possible issues include not being able to test for specific doors. 
 
 //var rnd = new Random();
 //var randomDoor = rnd.Next(1, 4);

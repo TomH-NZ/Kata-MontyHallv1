@@ -48,17 +48,23 @@ namespace MontyHallUnitTests
             Assert.Equal(prize, result);
         }
 
+        class RandomDoorStub : IRandomPrizeDoor
+        {
+            public string RandomPrizeDoor()
+            {
+                return "one";
+            }
+        }
+
         [Theory]
-        [InlineData("one", "three", "joke")]
-        [InlineData("two", "two", "serious")]
-        [InlineData("three", "one", "joke")]
-        [InlineData("one", "one", "serious")]
-        public void ReturnARandomDoorWithAPrize(string door, string randomDoor ,string prize)
+        [InlineData("one", "serious")]
+        [InlineData("two", "joke")]
+        [InlineData("three", "joke")]
+        public void ReturnARandomDoorWithAPrize(string door, string prize)
         {
             //Arrange
             var montyHallGame = new MontyHallGame();
-            IRandomPrizeDoor random = new RandomDoor();
-            //RandomDoor random2 = new RandomDoor();
+            IRandomPrizeDoor random = new RandomDoorStub();
             
             //Act
             var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
