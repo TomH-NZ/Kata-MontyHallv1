@@ -7,6 +7,8 @@ namespace MontyHallv1
     {
         public List<string> Doors = new List<string>{"one", "two", "three"};
 
+        public string PlayerSelection { get; }
+        
         public MontyHallGame()
         {
         }
@@ -15,9 +17,7 @@ namespace MontyHallv1
         {
             PlayerSelection = playerSelection;
         }
-
-        public string PlayerSelection { get; }
-
+        
         public string AssignRandomPrizeToDoor(string selectedDoor, IRandomPrizeDoor prizeDoor)
         {
             var convertedDoor = prizeDoor.RandomPrizeDoor();

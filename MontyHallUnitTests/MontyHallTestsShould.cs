@@ -113,7 +113,7 @@ namespace MontyHallUnitTests
         public static IEnumerable<object[]> TestMember()
         {
             var stubOne = new RandomDoorStubDoorOne();
-            var StubTwo = new RandomDoorStubDoorTwo();
+            var stubTwo = new RandomDoorStubDoorTwo();
             var stubThree = new RandomDoorStubDoorThree();
             
             return new List<object[]>
@@ -122,9 +122,9 @@ namespace MontyHallUnitTests
                 new object[]{"two", "joke", stubOne},
                 new object[]{"three", "joke", stubOne},
                 
-                new object[]{"one", "joke", StubTwo },
-                new object[]{"two", "serious", StubTwo},
-                new object[]{"three", "joke", StubTwo},
+                new object[]{"one", "joke", stubTwo },
+                new object[]{"two", "serious", stubTwo},
+                new object[]{"three", "joke", stubTwo},
                 
                 new object[]{"one", "joke", stubThree },
                 new object[]{"two", "joke", stubThree},

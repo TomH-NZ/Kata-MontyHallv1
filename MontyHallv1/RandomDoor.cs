@@ -15,10 +15,5 @@ namespace MontyHallv1
             };
             return prizeDoor;
         }
-
-        public string classOnlyMethod()
-        {
-            return "";
-        }
     }
 }
