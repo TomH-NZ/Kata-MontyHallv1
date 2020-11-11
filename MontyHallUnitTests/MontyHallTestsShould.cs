@@ -146,6 +146,17 @@ namespace MontyHallUnitTests
             Assert.Equal(prize, result);
         }
 
-        
+        [Fact]
+        public void ShowIfTheDoorIsOpenOrNot()
+        {
+            //Arrange
+            var montyHallGame = new MontyHallGame();
+
+            //Act
+            var result = montyHallGame.CheckDoorStatus("one");
+
+            //Assert
+            Assert.True(result);
+        }
     }
 }

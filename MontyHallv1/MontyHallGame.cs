@@ -24,5 +24,21 @@ namespace MontyHallv1
 
             return selectedDoor == convertedDoor ? "serious" : "joke";
         }
+        
+        Dictionary<string, bool> doorDictionary = new Dictionary<string, bool>()
+        {
+            {"one", true},
+            {"two", false},
+            {"three", false}
+        };
+
+        public bool CheckDoorStatus(string playerSelectedDoor)
+        {
+            if (doorDictionary.ContainsKey(playerSelectedDoor))
+            {
+                return doorDictionary[playerSelectedDoor];
+            }
+            return false;
+        }
     }
 }
