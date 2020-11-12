@@ -26,6 +26,5 @@ namespace MontyHallv1
         }
         
         private readonly Door _door;
-        
     }
 }
