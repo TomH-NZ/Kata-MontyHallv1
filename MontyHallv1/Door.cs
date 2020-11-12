@@ -8,13 +8,23 @@ namespace MontyHallv1
         {
         }
 
-        public string AssignRandomPrizeToDoor(string selectedDoor, IRandomPrizeDoor prizeDoor)
+        public string AssignRandomPrize(string selectedDoor, IRandomPrizeDoor prizeDoor)
         {
             var convertedDoor = prizeDoor.RandomPrizeDoor();
 
             return selectedDoor == convertedDoor ? "serious" : "joke";
         }
         
+        Dictionary<string, bool> _doorDictionary = new Dictionary<string, bool>()
+        {
+            {"one", true},
+            {"two", false},
+            {"three", false}
+        };
         
+        public bool OpenStatus(string playerSelectedDoor)
+        {
+            return _doorDictionary[playerSelectedDoor];
+        }
     }
 }

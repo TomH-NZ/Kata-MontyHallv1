@@ -26,17 +26,6 @@ namespace MontyHallv1
         }
         
         private readonly Door _door;
-
-        Dictionary<string, bool> _doorDictionary = new Dictionary<string, bool>()
-        {
-            {"one", true},
-            {"two", false},
-            {"three", false}
-        };
         
-        public bool CheckDoorStatus(string playerSelectedDoor)
-        {
-            return _doorDictionary[playerSelectedDoor];
-        }
     }
 }
