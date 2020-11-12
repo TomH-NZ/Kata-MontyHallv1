@@ -8,37 +8,35 @@ namespace MontyHallv1
         public List<string> Doors = new List<string>{"one", "two", "three"};
 
         public string PlayerSelection { get; }
-        
+
+        public Door Door
+        {
+            get { return _door; }
+        }
+
         public MontyHallGame()
         {
+            _door = new Door();
         }
 
         public MontyHallGame(string playerSelection)
         {
+            _door = new Door();
             PlayerSelection = playerSelection;
         }
         
-        public string AssignRandomPrizeToDoor(string selectedDoor, IRandomPrizeDoor prizeDoor)
-        {
-            var convertedDoor = prizeDoor.RandomPrizeDoor();
+        private readonly Door _door;
 
-            return selectedDoor == convertedDoor ? "serious" : "joke";
-        }
-        
-        Dictionary<string, bool> doorDictionary = new Dictionary<string, bool>()
+        Dictionary<string, bool> _doorDictionary = new Dictionary<string, bool>()
         {
             {"one", true},
             {"two", false},
             {"three", false}
         };
-
+        
         public bool CheckDoorStatus(string playerSelectedDoor)
         {
-            if (doorDictionary.ContainsKey(playerSelectedDoor))
-            {
-                return doorDictionary[playerSelectedDoor];
-            }
-            return false;
+            return _doorDictionary[playerSelectedDoor];
         }
     }
 }

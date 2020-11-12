@@ -54,7 +54,7 @@ namespace MontyHallUnitTests
             IRandomPrizeDoor random = new RandomDoorStubDoorOne();
             
             //Act
-            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
+            var result = montyHallGame.Door.AssignRandomPrizeToDoor(door, random);
 
             //Assert
             Assert.Equal(prize, result);
@@ -79,7 +79,7 @@ namespace MontyHallUnitTests
             IRandomPrizeDoor random = new RandomDoorStubDoorTwo();
             
             //Act
-            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
+            var result = montyHallGame.Door.AssignRandomPrizeToDoor(door, random);
 
             //Assert
             Assert.Equal(prize, result);
@@ -104,7 +104,7 @@ namespace MontyHallUnitTests
             IRandomPrizeDoor random = new RandomDoorStubDoorThree();
             
             //Act
-            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
+            var result = montyHallGame.Door.AssignRandomPrizeToDoor(door, random);
 
             //Assert
             Assert.Equal(prize, result);
@@ -140,14 +140,14 @@ namespace MontyHallUnitTests
             var montyHallGame = new MontyHallGame();
 
             //Act
-            var result = montyHallGame.AssignRandomPrizeToDoor(door, random);
+            var result = montyHallGame.Door.AssignRandomPrizeToDoor(door, random);
 
             //Assert
             Assert.Equal(prize, result);
         }
 
         [Fact]
-        public void ShowIfTheDoorIsOpenOrNot()
+        public void ShowIfTheDoorIsOpen()
         {
             //Arrange
             var montyHallGame = new MontyHallGame();
