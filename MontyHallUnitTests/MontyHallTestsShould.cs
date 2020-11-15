@@ -50,11 +50,11 @@ namespace MontyHallUnitTests
         public void ShowAPrizeWhenDoorOneIsSelectedWithStub(string door, string prize)
         {
             //Arrange
-            var montyHallGame = new MontyHallGame();
+            var doors = new Door();
             IRandom random = new RandomDoorStubDoorOne();
             
             //Act
-            var result = montyHallGame.Door.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, random);
 
             //Assert
             Assert.Equal(prize, result);
@@ -75,11 +75,11 @@ namespace MontyHallUnitTests
         public void ShowAPrizeWhenDoorTwoIsSelectedWithStub(string door, string prize)
         {
             //Arrange
-            var montyHallGame = new MontyHallGame();
+            var doors = new Door();
             IRandom random = new RandomDoorStubDoorTwo();
             
             //Act
-            var result = montyHallGame.Door.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, random);
 
             //Assert
             Assert.Equal(prize, result);
@@ -100,11 +100,11 @@ namespace MontyHallUnitTests
         public void ShowAPrizeWhenDoorThreeIsSelectedWithStub(string door, string prize)
         {
             //Arrange
-            var montyHallGame = new MontyHallGame();
+            var doors = new Door();
             IRandom random = new RandomDoorStubDoorThree();
             
             //Act
-            var result = montyHallGame.Door.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, random);
 
             //Assert
             Assert.Equal(prize, result);
@@ -112,10 +112,12 @@ namespace MontyHallUnitTests
         
         public static IEnumerable<object[]> TestMember()
         {
+            //Generates the stub object that is used by the data in the test.
             var stubOne = new RandomDoorStubDoorOne();
             var stubTwo = new RandomDoorStubDoorTwo();
             var stubThree = new RandomDoorStubDoorThree();
             
+            //This creates the data that is to be tested, similar to the [Theory] unit tests.
             return new List<object[]>
             {
                 new object[]{"one", "serious", stubOne },
@@ -137,10 +139,10 @@ namespace MontyHallUnitTests
         public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(string door, string prize, IRandom random)
         {
             //Arrange
-            var montyHallGame = new MontyHallGame();
+            var doors = new Door();
 
             //Act
-            var result = montyHallGame.Door.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, random);
 
             //Assert
             Assert.Equal(prize, result);
@@ -150,10 +152,10 @@ namespace MontyHallUnitTests
         public void ShowIfTheDoorIsOpen()
         {
             //Arrange
-            var montyHallGame = new MontyHallGame();
+            var doors = new Door();
 
             //Act
-            var result = montyHallGame.Door.OpenStatus("one");
+            var result = doors.OpenStatus("one");
 
             //Assert
             Assert.True(result);

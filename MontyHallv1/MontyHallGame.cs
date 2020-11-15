@@ -9,22 +9,13 @@ namespace MontyHallv1
 
         public string PlayerSelection { get; }
 
-        public Door Door
-        {
-            get { return _door; }
-        }
-
         public MontyHallGame()
         {
-            _door = new Door();
         }
 
         public MontyHallGame(string playerSelection)
         {
-            _door = new Door();
             PlayerSelection = playerSelection;
         }
-        
-        private readonly Door _door;
     }
 }
