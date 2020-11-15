@@ -6,7 +6,7 @@ using Xunit;
 
 namespace MontyHallUnitTests
 {
-    public class UnitTest1
+    public class GameUnitTests
     {
         [Fact]
         public void ShowThreeDoorsWhenAGameIsCreated()
@@ -159,6 +159,19 @@ namespace MontyHallUnitTests
 
             //Assert
             Assert.True(result);
+        }
+
+        [Fact]
+        public void ShowAJokePrizeWhenAnnouncerOpensADoor()
+        {
+            //Arrange
+            var game = new MontyHallGame();
+
+            //Act
+            var result = game.ShowAnnouncerDoor();
+
+            //Assert
+            Assert.Equal("joke", result);
         }
     }
 }

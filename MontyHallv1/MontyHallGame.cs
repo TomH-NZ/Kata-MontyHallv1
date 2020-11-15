@@ -17,5 +17,16 @@ namespace MontyHallv1
         {
             PlayerSelection = playerSelection;
         }
+
+
+        public string ShowAnnouncerDoor()
+        {
+            return "joke";
+        }
     }
 }
+// TODO: Generate three doors - done
+// TODO: Allow player to select door - done??
+// TODO: Show door with joke prize 
+// TODO: Give player option to change door 
+// TODO: Open door to reveal prize 
