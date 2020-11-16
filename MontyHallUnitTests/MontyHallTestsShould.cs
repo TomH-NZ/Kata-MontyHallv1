@@ -25,7 +25,8 @@ namespace MontyHallUnitTests
         public void DisplayAUserSelectionWhenAGameIsCreated()
         {
             //Arrange
-            var montyHallGame = new MontyHallGame("one");
+            var randomPrizeDoorAssigner= new RandomPrizeDoorAssigner();
+            var montyHallGame = new MontyHallGame("one", randomPrizeDoorAssigner );
             
             //Act
             var result = montyHallGame.PlayerSelection;
@@ -35,7 +36,7 @@ namespace MontyHallUnitTests
             Assert.Equal(expected, result);
         }
 
-        class RandomDoorStubDoorOne : IRandomPrizeDoorAssigner
+        class RandomDoorStubDoorOneReturnsSerious : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
@@ -51,7 +52,7 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var doors = new Door();
-            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorOne();
+            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorOneReturnsSerious();
             
             //Act
             var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
@@ -113,7 +114,7 @@ namespace MontyHallUnitTests
         public static IEnumerable<object[]> TestMember()
         {
             //Generates the stub object that is used by the data in the test.
-            var stubOne = new RandomDoorStubDoorOne();
+            var stubOne = new RandomDoorStubDoorOneReturnsSerious();
             var stubTwo = new RandomDoorStubDoorTwo();
             var stubThree = new RandomDoorStubDoorThree();
             
@@ -165,13 +166,37 @@ namespace MontyHallUnitTests
         public void ShowAJokePrizeWhenAnnouncerOpensADoor()
         {
             //Arrange
-            var game = new MontyHallGame();
+            var game = new MontyHallGame("two", new RandomDoorStubDoorTwo());
 
             //Act
             var result = game.AnnouncersDoor("two");
 
             //Assert
             Assert.Equal("one", result);
+        }
+        
+        class DoorTwoAndThreeAlternateStub : IRandomPrizeDoorAssigner
+        {
+            private int counter = 0;
+            public string PrizeDoor()
+            {
+                var output = counter % 2 == 0 ? "two" : "three";
+                counter++;
+                return output;
+            }
+        }
+        
+        [Fact]
+        public void ShowAJokePrizeWhenAnnouncerOpensADoor2()
+        {
+            //Arrange
+            var game = new MontyHallGame("one", new DoorTwoAndThreeAlternateStub());
+
+            //Act
+            var result = game.AnnouncersDoor("one");
+
+            //Assert
+            Assert.Equal("two", result);
         }
     }
 }

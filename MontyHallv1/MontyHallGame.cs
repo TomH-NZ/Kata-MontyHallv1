@@ -6,16 +6,19 @@ namespace MontyHallv1
     public class MontyHallGame
     {
         public List<string> Doors = new List<string>{"one", "two", "three"};
+        private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
 
         public string PlayerSelection { get; }
 
         public MontyHallGame()
         {
+            _randomPrizeDoorAssigner = new RandomPrizeDoorAssigner();
         }
 
-        public MontyHallGame(string playerSelection)
+        public MontyHallGame(string playerSelection, IRandomPrizeDoorAssigner prizeDoorAssigner)
         {
             PlayerSelection = playerSelection;
+            _randomPrizeDoorAssigner = prizeDoorAssigner;
         }
 
         private Door Door { get; } = new Door();
@@ -23,17 +26,21 @@ namespace MontyHallv1
         // This method returns the door that the announcer opens to show the joke prize.
         public string AnnouncersDoor(string playerSelection)
         {
-            var randomAssigner = new RandomPrizeDoorAssigner();
-            var randomPrizeDoor = randomAssigner.PrizeDoor();
-
+            var output = "";
+            
             foreach (var entry in Doors)
             {
-                if (entry != playerSelection && Door.AssignRandomPrize(entry, randomAssigner) == "joke")
+                while (entry != playerSelection && output == "")
                 {
-                    return entry;
+                    if (Door.AssignRandomPrize(entry, _randomPrizeDoorAssigner) == "joke")
+                    {
+                        output = entry;
+                        break;
+                    }
                 }
+                
             }
-            return "one";
+            return output;
         }
     }
 }
