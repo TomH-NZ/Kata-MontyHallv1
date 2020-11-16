@@ -2,7 +2,7 @@ using System;
 
 namespace MontyHallv1
 {
-    public class RandomPrizeDoorAssigner : IRandom
+    public class RandomPrizeDoorAssigner : IRandomPrizeDoorAssigner
     {
         public string PrizeDoor()
         {

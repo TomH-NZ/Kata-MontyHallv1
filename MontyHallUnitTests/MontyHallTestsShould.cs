@@ -35,7 +35,7 @@ namespace MontyHallUnitTests
             Assert.Equal(expected, result);
         }
 
-        class RandomDoorStubDoorOne : IRandom
+        class RandomDoorStubDoorOne : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
@@ -51,16 +51,16 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var doors = new Door();
-            IRandom random = new RandomDoorStubDoorOne();
+            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorOne();
             
             //Act
-            var result = doors.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
 
             //Assert
             Assert.Equal(prize, result);
         }
 
-        class RandomDoorStubDoorTwo : IRandom
+        class RandomDoorStubDoorTwo : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
@@ -76,16 +76,16 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var doors = new Door();
-            IRandom random = new RandomDoorStubDoorTwo();
+            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorTwo();
             
             //Act
-            var result = doors.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
 
             //Assert
             Assert.Equal(prize, result);
         }
         
-        class RandomDoorStubDoorThree : IRandom
+        class RandomDoorStubDoorThree : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
@@ -101,10 +101,10 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var doors = new Door();
-            IRandom random = new RandomDoorStubDoorThree();
+            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorThree();
             
             //Act
-            var result = doors.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
 
             //Assert
             Assert.Equal(prize, result);
@@ -136,13 +136,13 @@ namespace MontyHallUnitTests
         
         [Theory]
         [MemberData(nameof(TestMember))]
-        public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(string door, string prize, IRandom random)
+        public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(string door, string prize, IRandomPrizeDoorAssigner randomPrizeDoorAssigner)
         {
             //Arrange
             var doors = new Door();
 
             //Act
-            var result = doors.AssignRandomPrize(door, random);
+            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
 
             //Assert
             Assert.Equal(prize, result);
@@ -168,7 +168,7 @@ namespace MontyHallUnitTests
             var game = new MontyHallGame();
 
             //Act
-            var result = game.ShowAnnouncerDoor("two");
+            var result = game.AnnouncersDoor("two");
 
             //Assert
             Assert.Equal("one", result);

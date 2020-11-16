@@ -1,6 +1,6 @@
 namespace MontyHallv1
 {
-    public interface IRandom
+    public interface IRandomPrizeDoorAssigner
     {
         string PrizeDoor();
     }

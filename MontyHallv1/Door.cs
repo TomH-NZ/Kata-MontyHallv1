@@ -8,7 +8,7 @@ namespace MontyHallv1
         {
         }
 
-        public string AssignRandomPrize(string selectedDoor, IRandom prizeDoor)
+        public string AssignRandomPrize(string selectedDoor, IRandomPrizeDoorAssigner prizeDoor)
         {
             return selectedDoor == prizeDoor.PrizeDoor() ? "serious" : "joke";
         }
