@@ -168,10 +168,10 @@ namespace MontyHallUnitTests
             var game = new MontyHallGame();
 
             //Act
-            var result = game.ShowAnnouncerDoor();
+            var result = game.ShowAnnouncerDoor("two");
 
             //Assert
-            Assert.Equal("joke", result);
+            Assert.Equal("one", result);
         }
     }
 }

@@ -10,9 +10,7 @@ namespace MontyHallv1
 
         public string AssignRandomPrize(string selectedDoor, IRandom prizeDoor)
         {
-            var convertedDoor = prizeDoor.PrizeDoor();
-
-            return selectedDoor == convertedDoor ? "serious" : "joke";
+            return selectedDoor == prizeDoor.PrizeDoor() ? "serious" : "joke";
         }
         
         Dictionary<string, bool> _doorDictionary = new Dictionary<string, bool>()

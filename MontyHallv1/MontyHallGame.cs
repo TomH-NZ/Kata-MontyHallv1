@@ -18,10 +18,17 @@ namespace MontyHallv1
             PlayerSelection = playerSelection;
         }
 
+        private Door Door { get; } = new Door();
 
-        public string ShowAnnouncerDoor()
+        // This method returns the door that the announcer opens to show the joke prize.
+        public string ShowAnnouncerDoor(string playerSelection)
         {
-            return "joke";
+            var random = new RandomPrizeDoorAssigner();
+            var randomPrizeDoor = random.PrizeDoor();
+            
+            
+            
+            return "one";
         }
     }
 }
@@ -30,3 +37,5 @@ namespace MontyHallv1
 // TODO: Show door with joke prize 
 // TODO: Give player option to change door 
 // TODO: Open door to reveal prize 
+
+ 
