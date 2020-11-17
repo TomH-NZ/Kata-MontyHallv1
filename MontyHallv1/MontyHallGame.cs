@@ -23,7 +23,6 @@ namespace MontyHallv1
 
         private Door Door { get; } = new Door();
 
-        // This method returns the door that the announcer opens to show the joke prize.
         public string AnnouncersDoor(string playerSelection)
         {
             var output = "";
@@ -38,7 +37,6 @@ namespace MontyHallv1
                         break;
                     }
                 }
-                
             }
             return output;
         }

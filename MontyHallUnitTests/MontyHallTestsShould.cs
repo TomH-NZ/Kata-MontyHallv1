@@ -175,7 +175,7 @@ namespace MontyHallUnitTests
             Assert.Equal("one", result);
         }
         
-        class DoorTwoAndThreeAlternateStub : IRandomPrizeDoorAssigner
+        class AlternatingDoorTwoAndThreeStub : IRandomPrizeDoorAssigner
         {
             private int counter = 0;
             public string PrizeDoor()
@@ -187,10 +187,10 @@ namespace MontyHallUnitTests
         }
         
         [Fact]
-        public void ShowAJokePrizeWhenAnnouncerOpensADoor2()
+        public void AlwaysReturnAPrizeWhenADoorIsOpened()
         {
             //Arrange
-            var game = new MontyHallGame("one", new DoorTwoAndThreeAlternateStub());
+            var game = new MontyHallGame("one", new AlternatingDoorTwoAndThreeStub());
 
             //Act
             var result = game.AnnouncersDoor("one");
