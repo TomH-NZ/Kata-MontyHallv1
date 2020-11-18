@@ -14,8 +14,7 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var montyHallGame = new MontyHallGame();
-            //var doorLength = Enum.GetNames(typeof(Enums.Doors)).Length;
-            
+
             //Act
             var actual = Enum.GetNames(typeof(Enums.Doors)).Length;
 
@@ -171,7 +170,7 @@ namespace MontyHallUnitTests
             var game = new MontyHallGame("two", new RandomDoorStubDoorTwo());
 
             //Act
-            var result = game.AnnouncersDoor("two");
+            var result = game.AnnouncersDoor();
 
             //Assert
             Assert.Equal("one", result);
@@ -195,7 +194,7 @@ namespace MontyHallUnitTests
             var game = new MontyHallGame("one", new AlternatingDoorTwoAndThreeStub());
 
             //Act
-            var result = game.AnnouncersDoor("one");
+            var result = game.AnnouncersDoor();
 
             //Assert
             Assert.Equal("two", result);

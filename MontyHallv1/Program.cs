@@ -7,7 +7,8 @@ namespace MontyHallv1
     {
         public static void Main(string[] args)
         {
-            
+            var newGame = new UserInterface();
+            newGame.Game();
         }
     }
 }

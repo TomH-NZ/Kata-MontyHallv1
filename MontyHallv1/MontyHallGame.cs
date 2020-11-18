@@ -5,7 +5,6 @@ namespace MontyHallv1
 {
     public class MontyHallGame
     {
-        //public List<string> Doors = new List<string>{"one", "two", "three"};
         private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
 
         public string PlayerSelection { get; }
@@ -23,19 +22,24 @@ namespace MontyHallv1
 
         private Door Door { get; } = new Door();
 
-        public string AnnouncersDoor(string playerSelection)
+        public string AnnouncersDoor()
         {
             var output = "";
             
             foreach (var entry in Enum.GetValues(typeof(Enums.Doors)))
             {
-                while (entry.ToString() != playerSelection && output == "")
+                while (entry.ToString() != PlayerSelection && output == "")
                 {
                     if (Door.AssignRandomPrize(entry.ToString(), _randomPrizeDoorAssigner) == "joke")
                     {
                         output = entry.ToString();
                         break;
                     }
+                }
+
+                if (output != "")
+                {
+                    break;
                 }
             }
             return output;
@@ -45,6 +49,8 @@ namespace MontyHallv1
 // TODO: Generate three doors - done
 // TODO: Allow player to select door - done??
 // TODO: Show door with joke prize - done
+// TODO: create mapping of door to prize for each instance
+// TODO: Add validation for player selection to match enum list.
 // TODO: Give player option to change door 
 // TODO: Open door to reveal prize 
 
