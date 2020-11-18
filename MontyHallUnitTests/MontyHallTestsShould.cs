@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,10 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var montyHallGame = new MontyHallGame();
+            //var doorLength = Enum.GetNames(typeof(Enums.Doors)).Length;
             
             //Act
-            var actual = montyHallGame.Doors.Count;
+            var actual = Enum.GetNames(typeof(Enums.Doors)).Length;
 
             //Assert
             Assert.Equal(3, actual);
