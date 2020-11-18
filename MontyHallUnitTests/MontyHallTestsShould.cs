@@ -199,5 +199,16 @@ namespace MontyHallUnitTests
             //Assert
             Assert.Equal("two", result);
         }
+
+        [Fact]
+        public void ReturnCorrectValidationOnUserEnteredData()
+        {
+            //Arrange
+            
+            
+            //Act
+            
+            //Assert
+        }
     }
 }
