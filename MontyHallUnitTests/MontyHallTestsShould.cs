@@ -201,14 +201,30 @@ namespace MontyHallUnitTests
         }
 
         [Fact]
-        public void ReturnCorrectValidationOnUserEnteredData()
+        public void ReturnTrueWhenValidatingUserInput()
         {
             //Arrange
-            
-            
+            var validationTest = new Validation();
+
             //Act
+            var enumValue = Validation.UserEntry("one");
             
+
             //Assert
+            Assert.True(enumValue);
+        }
+        
+        [Fact]
+        public void ReturnFalseWhenValidatingUserInput()
+        {
+            //Arrange
+            var validationTest = new Validation();
+
+            //Act
+            var actual = Validation.UserEntry("flower");
+
+            //Assert
+            Assert.False(actual);
         }
     }
 }

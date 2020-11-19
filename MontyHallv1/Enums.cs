@@ -4,9 +4,9 @@ namespace MontyHallv1
     {
         public enum Doors
         {
-            one,
-            two,
-            three
+            one = 1,
+            two = 2,
+            three = 3
         }
     }
 }
