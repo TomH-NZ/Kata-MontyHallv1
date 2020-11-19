@@ -16,7 +16,7 @@ namespace MontyHallUnitTests
             var montyHallGame = new MontyHallGame();
 
             //Act
-            var actual = Enum.GetNames(typeof(Enums.Doors)).Length;
+            var actual = Enum.GetNames(typeof(Doors)).Length;
 
             //Assert
             Assert.Equal(3, actual);
@@ -204,11 +204,9 @@ namespace MontyHallUnitTests
         public void ReturnTrueWhenValidatingUserInput()
         {
             //Arrange
-            var validationTest = new Validation();
 
             //Act
             var enumValue = Validation.UserEntry("one");
-            
 
             //Assert
             Assert.True(enumValue);
@@ -218,13 +216,26 @@ namespace MontyHallUnitTests
         public void ReturnFalseWhenValidatingUserInput()
         {
             //Arrange
-            var validationTest = new Validation();
 
             //Act
-            var actual = Validation.UserEntry("flower");
+            var actual = Validation.UserEntry("tree");
 
             //Assert
             Assert.False(actual);
+        }
+
+        [Fact]
+        public void DoorAndPrizeStateTest()
+        {
+            //Arrange
+            var game = new MontyHallGame();
+
+            //Act
+            var result = game.AnnouncersDoor();
+
+            //Assert
+            Assert.Equal("joke", game.DoorPrizeStorage[result]);
+
         }
     }
 }

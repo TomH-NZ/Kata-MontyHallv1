@@ -21,28 +21,40 @@ namespace MontyHallv1
         }
 
         private Door Door { get; } = new Door();
+        public Dictionary<string, string> DoorPrizeStorage { get; set; }
+        //ToDo: use enum as key instead of string.
+        
 
         public string AnnouncersDoor()
         {
-            var output = "";
+            var outputOfAnnouncersDoor = "";
             
-            foreach (var entry in Enum.GetValues(typeof(Enums.Doors)))
+            Dictionary<string, string> prizeDictionary = new Dictionary<string, string>
             {
-                while (entry.ToString() != PlayerSelection && output == "")
+                {"one", "joke"},
+                {"two", "joke"},
+                {"three", "serious"}
+            };
+            
+            DoorPrizeStorage = prizeDictionary;
+            
+            foreach (var entry in Enum.GetValues(typeof(Doors)))
+            {
+                while (entry.ToString() != PlayerSelection && outputOfAnnouncersDoor == "")
                 {
                     if (Door.AssignRandomPrize(entry.ToString(), _randomPrizeDoorAssigner) == "joke")
                     {
-                        output = entry.ToString();
+                        outputOfAnnouncersDoor = entry.ToString();
                         break;
                     }
                 }
 
-                if (output != "")
+                if (outputOfAnnouncersDoor != "")
                 {
                     break;
                 }
             }
-            return output;
+            return outputOfAnnouncersDoor;
         }
     }
 }

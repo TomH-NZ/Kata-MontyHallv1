@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace MontyHallv1
@@ -23,6 +24,11 @@ namespace MontyHallv1
         public bool OpenStatus(string playerSelectedDoor)
         {
             return _doorDictionary[playerSelectedDoor];
+        }
+
+        public void DoorPrizeStorage(string doorSelection, string prizeSelection)
+        {
+            
         }
     }
 }

@@ -6,7 +6,7 @@ namespace MontyHallv1
     {
         public static bool UserEntry(string inputValue)
         {
-            var ifFound = false;
+            /*var ifFound = false;
 
             foreach (var entry in Enum.GetValues(typeof(Enums.Doors)))
             {
@@ -16,7 +16,10 @@ namespace MontyHallv1
                     break;
                 }
             }
-            return ifFound;
+            return ifFound;*/
+
+            return Enum.IsDefined(typeof(Doors), inputValue);
+            
         }
     }
 }
