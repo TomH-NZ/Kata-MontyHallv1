@@ -8,6 +8,7 @@ namespace MontyHallv1
         private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
 
         public string PlayerSelection { get; }
+        //ToDo: look at changing playerselection from string to an enum
 
         public MontyHallGame()
         {
@@ -21,40 +22,40 @@ namespace MontyHallv1
         }
 
         private Door Door { get; } = new Door();
-        public Dictionary<string, string> DoorPrizeStorage { get; set; }
+        public Dictionary<Doors, string> DoorPrizeStorage { get; set; }
         //ToDo: use enum as key instead of string.
         
 
-        public string AnnouncersDoor()
+        public Doors AnnouncersDoor()
         {
-            var outputOfAnnouncersDoor = "";
+            Doors? outputOfAnnouncersDoor = null;
             
-            Dictionary<string, string> prizeDictionary = new Dictionary<string, string>
+            Dictionary<Doors, string> prizeDictionary = new Dictionary<Doors, string>
             {
-                {"one", "joke"},
-                {"two", "joke"},
-                {"three", "serious"}
+                {Doors.one, "joke"},
+                {Doors.two, "joke"},
+                {Doors.three, "serious"}
             };
             
             DoorPrizeStorage = prizeDictionary;
             
-            foreach (var entry in Enum.GetValues(typeof(Doors)))
+            foreach (Doors entry in Enum.GetValues(typeof(Doors)))
             {
-                while (entry.ToString() != PlayerSelection && outputOfAnnouncersDoor == "")
+                while (entry.ToString() != PlayerSelection && !outputOfAnnouncersDoor.HasValue )
                 {
                     if (Door.AssignRandomPrize(entry.ToString(), _randomPrizeDoorAssigner) == "joke")
                     {
-                        outputOfAnnouncersDoor = entry.ToString();
+                        outputOfAnnouncersDoor = entry;
                         break;
                     }
                 }
 
-                if (outputOfAnnouncersDoor != "")
+                if (outputOfAnnouncersDoor.HasValue)
                 {
                     break;
                 }
             }
-            return outputOfAnnouncersDoor;
+            return outputOfAnnouncersDoor.Value;
         }
     }
 }

@@ -173,7 +173,7 @@ namespace MontyHallUnitTests
             var result = game.AnnouncersDoor();
 
             //Assert
-            Assert.Equal("one", result);
+            Assert.Equal(Doors.one, result);
         }
         
         class AlternatingDoorTwoAndThreeStub : IRandomPrizeDoorAssigner
@@ -197,7 +197,7 @@ namespace MontyHallUnitTests
             var result = game.AnnouncersDoor();
 
             //Assert
-            Assert.Equal("two", result);
+            Assert.Equal(Doors.two, result);
         }
 
         [Fact]

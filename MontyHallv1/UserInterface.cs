@@ -16,10 +16,10 @@ namespace MontyHallv1
                 
                 isValidEntry = Validation.UserEntry(enteredDoor);
             }
-            var MontyGame = new MontyHallGame(enteredDoor, new RandomPrizeDoorAssigner());
+            var montyGame = new MontyHallGame(enteredDoor, new RandomPrizeDoorAssigner());
             
-            Console.WriteLine($"You selected {MontyGame.PlayerSelection}");
-            Console.WriteLine($"Monty has opened door {MontyGame.AnnouncersDoor()} to show a {MontyGame.DoorPrizeStorage[MontyGame.AnnouncersDoor()]} prize!");
+            Console.WriteLine($"You selected {montyGame.PlayerSelection}");
+            Console.WriteLine($"Monty has opened door {montyGame.AnnouncersDoor()} to show a {montyGame.DoorPrizeStorage[montyGame.AnnouncersDoor()]} prize!");
             Console.WriteLine("Do you wish to change doors? Y/N");
         }
     }
