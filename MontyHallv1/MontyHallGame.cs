@@ -5,11 +5,12 @@ namespace MontyHallv1
 {
     public class MontyHallGame
     {
-        private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
-
         public PrizeDoors PlayerSelection { get; }
-        //ToDo: look at changing playerselection from string to an enum
-
+        public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
+        
+        private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
+        private Door Door { get; } = new Door();
+        
         public MontyHallGame()
         {
             _randomPrizeDoorAssigner = new RandomPrizeDoorAssigner();
@@ -20,9 +21,6 @@ namespace MontyHallv1
             PlayerSelection = playerSelection;
             _randomPrizeDoorAssigner = prizeDoorAssigner;
         }
-
-        private Door Door { get; } = new Door();
-        public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
         
         public PrizeDoors AnnouncersDoor()
         {
