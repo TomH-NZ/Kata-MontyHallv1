@@ -7,7 +7,7 @@ namespace MontyHallv1
     {
         private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
 
-        public string PlayerSelection { get; }
+        public PrizeDoors PlayerSelection { get; }
         //ToDo: look at changing playerselection from string to an enum
 
         public MontyHallGame()
@@ -15,33 +15,31 @@ namespace MontyHallv1
             _randomPrizeDoorAssigner = new RandomPrizeDoorAssigner();
         }
 
-        public MontyHallGame(string playerSelection, IRandomPrizeDoorAssigner prizeDoorAssigner)
+        public MontyHallGame(PrizeDoors playerSelection, IRandomPrizeDoorAssigner prizeDoorAssigner)
         {
             PlayerSelection = playerSelection;
             _randomPrizeDoorAssigner = prizeDoorAssigner;
         }
 
         private Door Door { get; } = new Door();
-        public Dictionary<Doors, string> DoorPrizeStorage { get; set; }
-        //ToDo: use enum as key instead of string.
+        public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
         
-
-        public Doors AnnouncersDoor()
+        public PrizeDoors AnnouncersDoor()
         {
-            Doors? outputOfAnnouncersDoor = null;
+            PrizeDoors? outputOfAnnouncersDoor = null;
             
-            Dictionary<Doors, string> prizeDictionary = new Dictionary<Doors, string>
+            Dictionary<PrizeDoors, string> prizeDictionary = new Dictionary<PrizeDoors, string>
             {
-                {Doors.one, "joke"},
-                {Doors.two, "joke"},
-                {Doors.three, "serious"}
+                {PrizeDoors.one, "joke"},
+                {PrizeDoors.two, "joke"},
+                {PrizeDoors.three, "serious"}
             };
             
             DoorPrizeStorage = prizeDictionary;
             
-            foreach (Doors entry in Enum.GetValues(typeof(Doors)))
+            foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {
-                while (entry.ToString() != PlayerSelection && !outputOfAnnouncersDoor.HasValue )
+                while (entry != PlayerSelection && !outputOfAnnouncersDoor.HasValue )
                 {
                     if (Door.AssignRandomPrize(entry.ToString(), _randomPrizeDoorAssigner) == "joke")
                     {

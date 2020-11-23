@@ -16,7 +16,7 @@ namespace MontyHallUnitTests
             var montyHallGame = new MontyHallGame();
 
             //Act
-            var actual = Enum.GetNames(typeof(Doors)).Length;
+            var actual = Enum.GetNames(typeof(PrizeDoors)).Length;
 
             //Assert
             Assert.Equal(3, actual);
@@ -27,11 +27,11 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var randomPrizeDoorAssigner= new RandomPrizeDoorAssigner();
-            var montyHallGame = new MontyHallGame("one", randomPrizeDoorAssigner );
+            var montyHallGame = new MontyHallGame(PrizeDoors.one, randomPrizeDoorAssigner );
             
             //Act
             var result = montyHallGame.PlayerSelection;
-            var expected = "one";
+            var expected = PrizeDoors.one;
 
             //Assert
             Assert.Equal(expected, result);
@@ -167,13 +167,13 @@ namespace MontyHallUnitTests
         public void ShowAJokePrizeWhenAnnouncerOpensADoor()
         {
             //Arrange
-            var game = new MontyHallGame("two", new RandomDoorStubDoorTwo());
+            var game = new MontyHallGame(PrizeDoors.two, new RandomDoorStubDoorTwo());
 
             //Act
             var result = game.AnnouncersDoor();
 
             //Assert
-            Assert.Equal(Doors.one, result);
+            Assert.Equal(PrizeDoors.one, result);
         }
         
         class AlternatingDoorTwoAndThreeStub : IRandomPrizeDoorAssigner
@@ -191,13 +191,13 @@ namespace MontyHallUnitTests
         public void AlwaysReturnAPrizeWhenADoorIsOpened()
         {
             //Arrange
-            var game = new MontyHallGame("one", new AlternatingDoorTwoAndThreeStub());
+            var game = new MontyHallGame(PrizeDoors.one, new AlternatingDoorTwoAndThreeStub());
 
             //Act
             var result = game.AnnouncersDoor();
 
             //Assert
-            Assert.Equal(Doors.two, result);
+            Assert.Equal(PrizeDoors.two, result);
         }
 
         [Fact]
@@ -236,6 +236,34 @@ namespace MontyHallUnitTests
             //Assert
             Assert.Equal("joke", game.DoorPrizeStorage[result]);
 
+        }
+
+        [Fact]
+        public void ConvertUserStringToEnum()
+        {
+            //Arrange
+            var stringValidation = Validation.InputConversion("one");
+            
+            //Act
+            var result = PrizeDoors.one;
+
+            //Assert
+            Assert.Equal(result, stringValidation);
+        }
+
+        [Theory]
+        [InlineData("one", PrizeDoors.one)]
+        [InlineData("two", PrizeDoors.two)]
+        [InlineData("three", PrizeDoors.three)]
+        public void OutputTheUserInputToAsAnEnum(string userInput, PrizeDoors expected)
+        {
+            //Arrange
+            
+            //Act
+            var actual = Validation.InputConversion(userInput);
+
+            //Assert
+            Assert.Equal(actual, expected );
         }
     }
 }

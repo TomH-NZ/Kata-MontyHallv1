@@ -1,6 +1,6 @@
 namespace MontyHallv1
 {
-    public enum Doors
+    public enum PrizeDoors
         {
             one,
             two,
