@@ -26,12 +26,14 @@ namespace MontyHallv1
         {
             PrizeDoors? outputOfAnnouncersDoor = null;
             
-            Dictionary<PrizeDoors, string> prizeDictionary = new Dictionary<PrizeDoors, string>
+            var prizeDictionary = new Dictionary<PrizeDoors, string>
             {
                 {PrizeDoors.one, "joke"},
                 {PrizeDoors.two, "joke"},
-                {PrizeDoors.three, "serious"}
+                {PrizeDoors.three, "joke"}
             };
+
+            prizeDictionary[Validation.InputConversion(_randomPrizeDoorAssigner.PrizeDoor())] = "serious";
             
             DoorPrizeStorage = prizeDictionary;
             

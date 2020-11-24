@@ -1,7 +1,5 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using MontyHallv1;
 using Xunit;
 
@@ -13,7 +11,6 @@ namespace MontyHallUnitTests
         public void ShowThreeDoorsWhenAGameIsCreated()
         {
             //Arrange
-            var montyHallGame = new MontyHallGame();
 
             //Act
             var actual = Enum.GetNames(typeof(PrizeDoors)).Length;
@@ -178,11 +175,11 @@ namespace MontyHallUnitTests
         
         class AlternatingDoorTwoAndThreeStub : IRandomPrizeDoorAssigner
         {
-            private int counter = 0;
+            private int _counter;
             public string PrizeDoor()
             {
-                var output = counter % 2 == 0 ? "two" : "three";
-                counter++;
+                var output = _counter % 2 == 0 ? "two" : "three";
+                _counter++;
                 return output;
             }
         }
@@ -264,6 +261,31 @@ namespace MontyHallUnitTests
 
             //Assert
             Assert.Equal(actual, expected );
+        }
+        
+        class RandomPrizeDoorStubOne : IRandomPrizeDoorAssigner
+        {
+            public string PrizeDoor()
+            {
+                return "one";
+            }
+        }
+
+        [Theory]
+        [InlineData(PrizeDoors.one, "serious")]
+        [InlineData(PrizeDoors.two, "joke")]
+        [InlineData(PrizeDoors.three, "joke")]
+        public void ReturnCorrectPrizeFromDoorPrizeStorage(PrizeDoors prizeDoor, string prizeResult)
+        {
+            //Arrange
+            var game = new MontyHallGame();
+            game.AnnouncersDoor.UpdateDictionary(prizeDoor);
+            
+            //Act
+            var actual = game.AnnouncersDoor.PrizeDictionary[prizeDoor];
+
+            //Assert
+            Assert.Equal(prizeResult, actual);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace MontyHallv1
             
             Console.WriteLine($"You selected door {montyGame.PlayerSelection}");
             Console.WriteLine($"Monty has opened door {montyGame.AnnouncersDoor()} to show a {montyGame.DoorPrizeStorage[montyGame.AnnouncersDoor()]} prize!");
-            Console.WriteLine("Do you wish to change doors? Y/N");
+            Console.WriteLine("Do you wish to change doors? Yes/No");
         }
     }
 }
