@@ -274,18 +274,34 @@ namespace MontyHallUnitTests
         [Theory]
         [InlineData(PrizeDoors.one, "serious")]
         [InlineData(PrizeDoors.two, "joke")]
-        [InlineData(PrizeDoors.three, "joke")]
-        public void ReturnCorrectPrizeFromDoorPrizeStorage(PrizeDoors prizeDoor, string prizeResult)
+        //[InlineData(PrizeDoors.three, "joke")]
+        public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors prizeDoor, string prizeResult)
         {
             //Arrange
-            var game = new MontyHallGame();
-            game.AnnouncersDoor.UpdateDictionary(prizeDoor);
+            var game = new MontyHallGame(prizeDoor, new RandomPrizeDoorStubOne());
             
             //Act
-            var actual = game.AnnouncersDoor.PrizeDictionary[prizeDoor];
-
+            game.UpdateDictionary(prizeDoor);
+            var actual = game.DoorPrizeStorage[prizeDoor];
+            
             //Assert
             Assert.Equal(prizeResult, actual);
+        }
+        
+        [Fact]
+        public void ReturnCorrectPrizeFromDoorPrizeStorageFact()
+        {
+            //Arrange
+            var game = new MontyHallGame(PrizeDoors.one, new RandomPrizeDoorStubOne());
+            
+            //Act
+            game.UpdateDictionary(PrizeDoors.one);
+            var actualDoorOnePrize = game.DoorPrizeStorage[PrizeDoors.one];
+            var actualDoorTwoPrize = game.DoorPrizeStorage[PrizeDoors.two];
+            
+            //Assert
+            Assert.Equal("serious", actualDoorOnePrize);
+            Assert.Equal("joke", actualDoorTwoPrize);
         }
     }
 }

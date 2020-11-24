@@ -25,18 +25,7 @@ namespace MontyHallv1
         public PrizeDoors AnnouncersDoor()
         {
             PrizeDoors? outputOfAnnouncersDoor = null;
-            
-            var prizeDictionary = new Dictionary<PrizeDoors, string>
-            {
-                {PrizeDoors.one, "joke"},
-                {PrizeDoors.two, "joke"},
-                {PrizeDoors.three, "joke"}
-            };
 
-            prizeDictionary[Validation.InputConversion(_randomPrizeDoorAssigner.PrizeDoor())] = "serious";
-            
-            DoorPrizeStorage = prizeDictionary;
-            
             foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {
                 while (entry != PlayerSelection && !outputOfAnnouncersDoor.HasValue )
@@ -55,11 +44,20 @@ namespace MontyHallv1
             }
             return outputOfAnnouncersDoor.Value;
         }
+
+        
+
+        public void UpdateDictionary(PrizeDoors prizeDoor)
+        {
+            var prizeStorage = new Dictionary<PrizeDoors, string>();
+            //write minimum code to get dictionary working.
+
+            DoorPrizeStorage = prizeStorage;
+            
+            DoorPrizeStorage.Add(prizeDoor, "serious");
+        }
     }
 }
-// TODO: Generate three doors - done
-// TODO: Allow player to select door - done??
-// TODO: Show door with joke prize - done
 // TODO: create mapping of door to prize for each instance
 // TODO: Add validation for player selection to match enum list.
 // TODO: Give player option to change door 

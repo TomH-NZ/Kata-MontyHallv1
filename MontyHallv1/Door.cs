@@ -14,7 +14,7 @@ namespace MontyHallv1
             return selectedDoor == prizeDoor.PrizeDoor() ? "serious" : "joke";
         }
         
-        Dictionary<string, bool> _doorDictionary = new Dictionary<string, bool>
+        Dictionary<string, bool> _openDoorStatus = new Dictionary<string, bool>
         {
             {"one", true},
             {"two", false},
@@ -23,15 +23,8 @@ namespace MontyHallv1
         
         public bool OpenStatus(string playerSelectedDoor)
         {
-            return _doorDictionary[playerSelectedDoor];
+            return _openDoorStatus[playerSelectedDoor];
         }
-
-        Dictionary<PrizeDoors, string> _doorPrizeStatus = new Dictionary<PrizeDoors, string>
-        {
-            {PrizeDoors.one, "joke"},
-            {PrizeDoors.two, "joke"},
-            {PrizeDoors.three, "joke"}
-        };
     }
 }
 // TODO: Assign prizes to doors - done
