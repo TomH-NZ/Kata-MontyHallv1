@@ -7,6 +7,7 @@ namespace MontyHallv1
     {
         public PrizeDoors PlayerSelection { get; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
+        //private Dictionary<>;
         
         private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
         private Door Door { get; } = new Door();
@@ -25,6 +26,8 @@ namespace MontyHallv1
         public PrizeDoors AnnouncersDoor()
         {
             PrizeDoors? outputOfAnnouncersDoor = null;
+            //TODO: insert prize dictionary here so that random prize is run once only.
+            //TODO: crete dictionary in this class rather than in a new one.
 
             foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {
@@ -44,9 +47,7 @@ namespace MontyHallv1
             }
             return outputOfAnnouncersDoor.Value;
         }
-
         
-
         public void UpdateDictionary(PrizeDoors prizeDoor)
         {
             var prizeStorage = new Dictionary<PrizeDoors, string>
