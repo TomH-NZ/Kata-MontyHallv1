@@ -49,12 +49,17 @@ namespace MontyHallv1
 
         public void UpdateDictionary(PrizeDoors prizeDoor)
         {
-            var prizeStorage = new Dictionary<PrizeDoors, string>();
+            var prizeStorage = new Dictionary<PrizeDoors, string>
+            {
+                {PrizeDoors.one, "joke"},
+                {PrizeDoors.two, "joke"},
+                {PrizeDoors.three, "joke"}
+            };
             //write minimum code to get dictionary working.
 
             DoorPrizeStorage = prizeStorage;
             
-            DoorPrizeStorage.Add(prizeDoor, "serious");
+            DoorPrizeStorage[prizeDoor] = "serious";
         }
     }
 }

@@ -221,8 +221,8 @@ namespace MontyHallUnitTests
             Assert.False(actual);
         }
 
-        [Fact]
-        public void DoorAndPrizeStateTest()
+        /*[Fact]
+        public void ReturnJokePrizeForAnnouncersDoor()
         {
             //Arrange
             var game = new MontyHallGame();
@@ -231,9 +231,9 @@ namespace MontyHallUnitTests
             var result = game.AnnouncersDoor();
 
             //Assert
-            Assert.Equal("joke", game.DoorPrizeStorage[result]);
+            Assert.Equal("joke", result);
 
-        }
+        }*/
 
         [Fact]
         public void ConvertUserStringToEnum()
@@ -271,10 +271,10 @@ namespace MontyHallUnitTests
             }
         }
 
-        [Theory]
+        [Theory] //ToDo: look at converting this test to use member data as per line 112 / 138.
         [InlineData(PrizeDoors.one, "serious")]
-        [InlineData(PrizeDoors.two, "joke")]
-        //[InlineData(PrizeDoors.three, "joke")]
+        [InlineData(PrizeDoors.two, "serious")]
+        [InlineData(PrizeDoors.three, "serious")]
         public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors prizeDoor, string prizeResult)
         {
             //Arrange
@@ -289,7 +289,7 @@ namespace MontyHallUnitTests
         }
         
         [Fact]
-        public void ReturnCorrectPrizeFromDoorPrizeStorageFact()
+        public void ReturnCorrectPrizeFromDoorPrizeStorageFact() 
         {
             //Arrange
             var game = new MontyHallGame(PrizeDoors.one, new RandomPrizeDoorStubOne());
@@ -298,10 +298,12 @@ namespace MontyHallUnitTests
             game.UpdateDictionary(PrizeDoors.one);
             var actualDoorOnePrize = game.DoorPrizeStorage[PrizeDoors.one];
             var actualDoorTwoPrize = game.DoorPrizeStorage[PrizeDoors.two];
+            var actualDoorThreePrize = game.DoorPrizeStorage[PrizeDoors.three];
             
             //Assert
             Assert.Equal("serious", actualDoorOnePrize);
             Assert.Equal("joke", actualDoorTwoPrize);
+            Assert.Equal("joke", actualDoorThreePrize);
         }
     }
 }
