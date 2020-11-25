@@ -34,7 +34,7 @@ namespace MontyHallUnitTests
             Assert.Equal(expected, result);
         }
 
-        class RandomDoorStubDoorOneReturnsSerious : IRandomPrizeDoorAssigner
+        private class StubForDoorOneReturnsSerious : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
@@ -42,81 +42,30 @@ namespace MontyHallUnitTests
             }
         }
 
-        [Theory]
-        [InlineData("one", "serious")]
-        [InlineData("two", "joke")]
-        [InlineData("three", "joke")]
-        public void ShowAPrizeWhenDoorOneIsSelectedWithStub(string door, string prize)
-        {
-            //Arrange
-            var doors = new Door();
-            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorOneReturnsSerious();
-            
-            //Act
-            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
-
-            //Assert
-            Assert.Equal(prize, result);
-        }
-
-        class RandomDoorStubDoorTwo : IRandomPrizeDoorAssigner
+        private class StubForDoorTwoReturnsSerious : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
                 return "two";
             }
         }
-        
-        [Theory]
-        [InlineData("one", "joke")]
-        [InlineData("two", "serious")]
-        [InlineData("three", "joke")]
-        public void ShowAPrizeWhenDoorTwoIsSelectedWithStub(string door, string prize)
-        {
-            //Arrange
-            var doors = new Door();
-            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorTwo();
-            
-            //Act
-            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
 
-            //Assert
-            Assert.Equal(prize, result);
-        }
-        
-        class RandomDoorStubDoorThree : IRandomPrizeDoorAssigner
+        private class StubForDoorThreeReturnsSerious : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
                 return "three";
             }
         }
-        
-        [Theory]
-        [InlineData("one", "joke")]
-        [InlineData("two", "joke")]
-        [InlineData("three", "serious")]
-        public void ShowAPrizeWhenDoorThreeIsSelectedWithStub(string door, string prize)
-        {
-            //Arrange
-            var doors = new Door();
-            IRandomPrizeDoorAssigner randomPrizeDoorAssigner = new RandomDoorStubDoorThree();
-            
-            //Act
-            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
 
-            //Assert
-            Assert.Equal(prize, result);
-        }
-        
-        public static IEnumerable<object[]> TestMember()
+        public static IEnumerable<object[]> AssignRandomPrizeTestMember()
         {
             //Generates the stub object that is used by the data in the test.
-            var stubOne = new RandomDoorStubDoorOneReturnsSerious();
-            var stubTwo = new RandomDoorStubDoorTwo();
-            var stubThree = new RandomDoorStubDoorThree();
+            var stubOne = new StubForDoorOneReturnsSerious();
+            var stubTwo = new StubForDoorTwoReturnsSerious();
+            var stubThree = new StubForDoorThreeReturnsSerious();
             
-            //This creates the data that is to be tested, similar to the [Theory] unit tests.
+            //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
             return new List<object[]>
             {
                 new object[]{"one", "serious", stubOne },
@@ -134,7 +83,7 @@ namespace MontyHallUnitTests
         }
         
         [Theory]
-        [MemberData(nameof(TestMember))]
+        [MemberData(nameof(AssignRandomPrizeTestMember))]
         public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(string door, string prize, IRandomPrizeDoorAssigner randomPrizeDoorAssigner)
         {
             //Arrange
@@ -164,7 +113,7 @@ namespace MontyHallUnitTests
         public void ShowAJokePrizeWhenAnnouncerOpensADoor()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two, new RandomDoorStubDoorTwo());
+            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorTwoReturnsSerious());
 
             //Act
             var result = game.AnnouncersDoor();
@@ -222,7 +171,7 @@ namespace MontyHallUnitTests
         }
 
         /*[Fact]
-        public void ReturnJokePrizeForAnnouncersDoor()
+        public void DoorPrizeStatus()
         {
             //Arrange
             var game = new MontyHallGame();
@@ -234,20 +183,7 @@ namespace MontyHallUnitTests
             Assert.Equal("joke", result);
 
         }*/
-
-        [Fact]
-        public void ConvertUserStringToEnum()
-        {
-            //Arrange
-            var stringValidation = Validation.InputConversion("one");
-            
-            //Act
-            var result = PrizeDoors.one;
-
-            //Assert
-            Assert.Equal(result, stringValidation);
-        }
-
+        
         [Theory]
         [InlineData("one", PrizeDoors.one)]
         [InlineData("two", PrizeDoors.two)]
@@ -262,48 +198,68 @@ namespace MontyHallUnitTests
             //Assert
             Assert.Equal(actual, expected );
         }
-        
-        class RandomPrizeDoorStubOne : IRandomPrizeDoorAssigner
+
+        private class RandomPrizeDoorStubOne : IRandomPrizeDoorAssigner
         {
             public string PrizeDoor()
             {
                 return "one";
             }
         }
+        
+        private class RandomPrizeDoorStubTwo : IRandomPrizeDoorAssigner
+        {
+            public string PrizeDoor()
+            {
+                return "two";
+            }
+        }
+        
+        private class RandomPrizeDoorStubThree : IRandomPrizeDoorAssigner
+        {
+            public string PrizeDoor()
+            {
+                return "three";
+            }
+        }
 
-        [Theory] //ToDo: look at converting this test to use member data as per line 112 / 138.
-        [InlineData(PrizeDoors.one, "serious")]
-        [InlineData(PrizeDoors.two, "serious")]
-        [InlineData(PrizeDoors.three, "serious")]
-        public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors prizeDoor, string prizeResult)
+        public static IEnumerable<object[]> PrizeDoorStorageTestMember()
+        {
+            //Generates the stub object that is used by the data in the test.
+            var stubOne = new RandomPrizeDoorStubOne();
+            var stubTwo = new RandomPrizeDoorStubTwo();
+            var stubThree = new RandomPrizeDoorStubThree();
+            
+            //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
+            return new List<object[]>
+            {
+                new object[] {PrizeDoors.one, PrizeDoors.one,  "serious", stubOne},
+                new object[] {PrizeDoors.two, PrizeDoors.one, "joke", stubOne},
+                new object[] {PrizeDoors.three, PrizeDoors.one, "joke", stubOne},
+
+                new object[] {PrizeDoors.one, PrizeDoors.two, "joke", stubTwo},
+                new object[] {PrizeDoors.two, PrizeDoors.two, "serious", stubTwo},
+                new object[] {PrizeDoors.three, PrizeDoors.two, "joke", stubTwo},
+
+                new object[] {PrizeDoors.one, PrizeDoors.three, "joke", stubThree},
+                new object[] {PrizeDoors.two, PrizeDoors.three, "joke", stubThree},
+                new object[] {PrizeDoors.three, PrizeDoors.three, "serious", stubThree}
+            };
+        }
+        
+        [Theory] 
+        [MemberData(nameof(PrizeDoorStorageTestMember))]
+        public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors testedDoor, PrizeDoors actualPrize, string prizeResult, IRandomPrizeDoorAssigner randomPrizeDoorAssigner)
         {
             //Arrange
-            var game = new MontyHallGame(prizeDoor, new RandomPrizeDoorStubOne());
+            var game = new MontyHallGame(testedDoor, randomPrizeDoorAssigner);
             
             //Act
-            game.UpdateDictionary(prizeDoor);
-            var actual = game.DoorPrizeStorage[prizeDoor];
+            game.UpdateDictionary(actualPrize);
+            var actual = game.DoorPrizeStorage[testedDoor];
             
             //Assert
             Assert.Equal(prizeResult, actual);
-        }
-        
-        [Fact]
-        public void ReturnCorrectPrizeFromDoorPrizeStorageFact() 
-        {
-            //Arrange
-            var game = new MontyHallGame(PrizeDoors.one, new RandomPrizeDoorStubOne());
-            
-            //Act
-            game.UpdateDictionary(PrizeDoors.one);
-            var actualDoorOnePrize = game.DoorPrizeStorage[PrizeDoors.one];
-            var actualDoorTwoPrize = game.DoorPrizeStorage[PrizeDoors.two];
-            var actualDoorThreePrize = game.DoorPrizeStorage[PrizeDoors.three];
-            
-            //Assert
-            Assert.Equal("serious", actualDoorOnePrize);
-            Assert.Equal("joke", actualDoorTwoPrize);
-            Assert.Equal("joke", actualDoorThreePrize);
         }
     }
 }
