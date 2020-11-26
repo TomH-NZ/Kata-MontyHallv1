@@ -162,36 +162,12 @@ namespace MontyHallUnitTests //TODO: split tests out to new classes depending on
             Assert.Equal(actual, expected );
         }
 
-        private class RandomPrizeDoorStubOne : IRandomPrizeDoorAssigner
-        {
-            public string PrizeDoor()
-            {
-                return "one";
-            }
-        }
-        
-        private class RandomPrizeDoorStubTwo : IRandomPrizeDoorAssigner
-        {
-            public string PrizeDoor()
-            {
-                return "two";
-            }
-        }
-        
-        private class RandomPrizeDoorStubThree : IRandomPrizeDoorAssigner
-        {
-            public string PrizeDoor()
-            {
-                return "three";
-            }
-        }
-
         public static IEnumerable<object[]> PrizeDoorStorageTestMember()
         {
             //Generates the stub object that is used by the data in the test.
-            var stubOne = new RandomPrizeDoorStubOne();
-            var stubTwo = new RandomPrizeDoorStubTwo();
-            var stubThree = new RandomPrizeDoorStubThree();
+            var stubOne = new StubForDoorOneReturnsSerious();
+            var stubTwo = new StubForDoorTwoReturnsSerious();
+            var stubThree = new StubForDoorThreeReturnsSerious();
             
             //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
             return new List<object[]>
@@ -243,7 +219,7 @@ namespace MontyHallUnitTests //TODO: split tests out to new classes depending on
         public void AllowPlayerToChangeDoorToDoorTwo()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.three, new RandomPrizeDoorStubOne());
+            var game = new MontyHallGame(PrizeDoors.three, new StubForDoorOneReturnsSerious());
             
             //Act
             game.ChangePlayerDoor();
@@ -257,14 +233,14 @@ namespace MontyHallUnitTests //TODO: split tests out to new classes depending on
         public void AllowPlayerToChangeDoorToDoorOne() // use ugly code to get this test passing.
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two, new RandomPrizeDoorStubOne());
+            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorOneReturnsSerious());
             
             //Act
             game.ChangePlayerDoor();
             var actual = game.PlayerSelection;
 
             //Assert
-            Assert.Equal(PrizeDoors.two, actual);
+            Assert.Equal(PrizeDoors.one, actual);
         }
         
         
