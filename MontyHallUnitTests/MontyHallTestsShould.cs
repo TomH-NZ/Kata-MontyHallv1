@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MontyHallv1;
 using Xunit;
 
-namespace MontyHallUnitTests
+namespace MontyHallUnitTests //TODO: split tests out to new classes depending on behaviour being tested.
 {
     public class GameUnitTests
     {
@@ -121,30 +121,6 @@ namespace MontyHallUnitTests
             //Assert
             Assert.Equal(PrizeDoors.one, result);
         }
-        
-        /*class AlternatingDoorTwoAndThreeStub : IRandomPrizeDoorAssigner
-        {
-            private int _counter;
-            public string PrizeDoor()
-            {
-                var output = _counter % 2 == 0 ? "two" : "three";
-                _counter++;
-                return output;
-            }
-        }
-        
-        [Fact]
-        public void AlwaysReturnAPrizeWhenADoorIsOpened()
-        {
-            //Arrange
-            var game = new MontyHallGame(PrizeDoors.one, new AlternatingDoorTwoAndThreeStub());
-
-            //Act
-            var result = game.AnnouncersDoor();
-
-            //Assert
-            Assert.Equal(PrizeDoors.two, result);
-        }*/
 
         [Fact]
         public void ReturnTrueWhenValidatingUserInput()
@@ -169,20 +145,7 @@ namespace MontyHallUnitTests
             //Assert
             Assert.False(actual);
         }
-
-        /*[Fact]
-        public void DoorPrizeStatus()
-        {
-            //Arrange
-            var game = new MontyHallGame();
-
-            //Act
-            var result = game.AnnouncersDoor();
-
-            //Assert
-            Assert.Equal("joke", result);
-
-        }*/
+        
         
         [Theory]
         [InlineData("one", PrizeDoors.one)]
@@ -263,17 +226,72 @@ namespace MontyHallUnitTests
         }
 
         [Fact]
-        public void AllowPlayerToChangeDoorToUnselectedDoor()
+        public void AllowPlayerToChangeDoorToDoorThree()
         {
             //Arrange
             var game = new MontyHallGame();
             
             //Act
-            var actual = game.ChangePlayerDoor();
+            game.ChangePlayerDoor();
+            var actual = game.PlayerSelection;
 
             //Assert
             Assert.Equal(PrizeDoors.three, actual);
         }
+        
+        [Fact]
+        public void AllowPlayerToChangeDoorToDoorTwo()
+        {
+            //Arrange
+            var game = new MontyHallGame(PrizeDoors.three, new RandomPrizeDoorStubOne());
+            
+            //Act
+            game.ChangePlayerDoor();
+            var actual = game.PlayerSelection;
 
+            //Assert
+            Assert.Equal(PrizeDoors.two, actual);
+        }
+        
+        [Fact]
+        public void AllowPlayerToChangeDoorToDoorOne() // use ugly code to get this test passing.
+        {
+            //Arrange
+            var game = new MontyHallGame(PrizeDoors.two, new RandomPrizeDoorStubOne());
+            
+            //Act
+            game.ChangePlayerDoor();
+            var actual = game.PlayerSelection;
+
+            //Assert
+            Assert.Equal(PrizeDoors.two, actual);
+        }
+        
+        
+
+        [Fact]
+        public void ReturnTrueForChangeDoorInputValidation()
+        {
+            //Arrange
+            
+            //Act
+            var actual = Validation.ChangeDoorValidator("yes");
+
+            //Assert
+            Assert.True(actual);
+        }
+
+        [Fact]
+        public void ReturnFalseForChangeDoorInputValidation()
+        {
+            //Arrange
+            
+            //Act
+            var actual = Validation.ChangeDoorValidator("y");
+
+            //Assert
+            Assert.False(actual);
+
+        }
     }
 }

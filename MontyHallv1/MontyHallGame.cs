@@ -1,12 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 
 namespace MontyHallv1
 {
     public class MontyHallGame
     {
-        public PrizeDoors PlayerSelection { get; }
+        public PrizeDoors PlayerSelection { get; set; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
         
         private Dictionary<PrizeDoors, string> _prizeStorage = new Dictionary<PrizeDoors, string>
@@ -58,7 +57,9 @@ namespace MontyHallv1
 
         public PrizeDoors ChangePlayerDoor()
         {
-            return PrizeDoors.three;
+            PlayerSelection = PlayerSelection == PrizeDoors.three ? PrizeDoors.two : PrizeDoors.three;
+
+            return PlayerSelection;
         }
     }
 }

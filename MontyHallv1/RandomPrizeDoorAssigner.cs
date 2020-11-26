@@ -4,7 +4,7 @@ namespace MontyHallv1
 {
     public class RandomPrizeDoorAssigner : IRandomPrizeDoorAssigner
     {
-        public string PrizeDoor()
+        public string PrizeDoor() //TODO: Update switch to use enum rather than string.
         {
             var prizeDoor = new Random().Next(1, 4) switch
             {

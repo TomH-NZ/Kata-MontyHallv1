@@ -12,7 +12,7 @@ namespace MontyHallv1
             var changeDoor = "";
             while (!isValidEntry)
             {
-                Console.WriteLine($"Please choose a door: {PrizeDoors.one.ToString()}, {PrizeDoors.two.ToString()}, {PrizeDoors.three.ToString()}");
+                Console.WriteLine($"Please choose a door: {PrizeDoors.one}, {PrizeDoors.two}, {PrizeDoors.three}");
                 enteredDoor = Console.ReadLine();
                 
                 isValidEntry = Validation.UserEntry(enteredDoor);
