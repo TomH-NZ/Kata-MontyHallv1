@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace MontyHallv1
 {
@@ -7,7 +8,13 @@ namespace MontyHallv1
     {
         public PrizeDoors PlayerSelection { get; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
-        //private Dictionary<>;
+        
+        private Dictionary<PrizeDoors, string> _prizeStorage = new Dictionary<PrizeDoors, string>
+        {
+            {PrizeDoors.one, "joke"},
+            {PrizeDoors.two, "joke"},
+            {PrizeDoors.three, "joke"}
+        };
         
         private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
         private Door Door { get; } = new Door();
@@ -26,46 +33,37 @@ namespace MontyHallv1
         public PrizeDoors AnnouncersDoor()
         {
             PrizeDoors? outputOfAnnouncersDoor = null;
-            //TODO: insert prize dictionary here so that random prize is run once only.
-            //TODO: crete dictionary in this class rather than in a new one.
+
+            var randomDoorValue = _randomPrizeDoorAssigner.PrizeDoor();
+            
+            UpdatePrizeStorage(Validation.InputConversion(randomDoorValue));
 
             foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {
-                while (entry != PlayerSelection && !outputOfAnnouncersDoor.HasValue )
+                if (entry != PlayerSelection && DoorPrizeStorage[entry] == "joke")
                 {
-                    if (Door.AssignRandomPrize(entry.ToString(), _randomPrizeDoorAssigner) == "joke")
-                    {
-                        outputOfAnnouncersDoor = entry;
-                        break;
-                    }
-                }
-
-                if (outputOfAnnouncersDoor.HasValue)
-                {
+                    outputOfAnnouncersDoor = entry;
                     break;
                 }
             }
             return outputOfAnnouncersDoor.Value;
         }
         
-        public void UpdateDictionary(PrizeDoors prizeDoor)
+        public void UpdatePrizeStorage(PrizeDoors prizeDoor)
         {
-            var prizeStorage = new Dictionary<PrizeDoors, string>
-            {
-                {PrizeDoors.one, "joke"},
-                {PrizeDoors.two, "joke"},
-                {PrizeDoors.three, "joke"}
-            };
-            //write minimum code to get dictionary working.
-
-            DoorPrizeStorage = prizeStorage;
+            DoorPrizeStorage = _prizeStorage;
             
             DoorPrizeStorage[prizeDoor] = "serious";
         }
+
+        public PrizeDoors ChangePlayerDoor()
+        {
+            return PrizeDoors.three;
+        }
     }
 }
-// TODO: create mapping of door to prize for each instance
-// TODO: Add validation for player selection to match enum list.
+
+
 // TODO: Give player option to change door 
 // TODO: Open door to reveal prize 
 

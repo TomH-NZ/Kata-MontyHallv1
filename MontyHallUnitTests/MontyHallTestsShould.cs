@@ -113,7 +113,7 @@ namespace MontyHallUnitTests
         public void ShowAJokePrizeWhenAnnouncerOpensADoor()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorTwoReturnsSerious());
+            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorThreeReturnsSerious());
 
             //Act
             var result = game.AnnouncersDoor();
@@ -122,7 +122,7 @@ namespace MontyHallUnitTests
             Assert.Equal(PrizeDoors.one, result);
         }
         
-        class AlternatingDoorTwoAndThreeStub : IRandomPrizeDoorAssigner
+        /*class AlternatingDoorTwoAndThreeStub : IRandomPrizeDoorAssigner
         {
             private int _counter;
             public string PrizeDoor()
@@ -144,7 +144,7 @@ namespace MontyHallUnitTests
 
             //Assert
             Assert.Equal(PrizeDoors.two, result);
-        }
+        }*/
 
         [Fact]
         public void ReturnTrueWhenValidatingUserInput()
@@ -255,11 +255,25 @@ namespace MontyHallUnitTests
             var game = new MontyHallGame(testedDoor, randomPrizeDoorAssigner);
             
             //Act
-            game.UpdateDictionary(actualPrize);
+            game.UpdatePrizeStorage(actualPrize);
             var actual = game.DoorPrizeStorage[testedDoor];
             
             //Assert
             Assert.Equal(prizeResult, actual);
         }
+
+        [Fact]
+        public void AllowPlayerToChangeDoorToUnselectedDoor()
+        {
+            //Arrange
+            var game = new MontyHallGame();
+            
+            //Act
+            var actual = game.ChangePlayerDoor();
+
+            //Assert
+            Assert.Equal(PrizeDoors.three, actual);
+        }
+
     }
 }
