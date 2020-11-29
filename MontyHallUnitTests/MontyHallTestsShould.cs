@@ -123,7 +123,5 @@ namespace MontyHallUnitTests //TODO: split tests out to new classes depending on
             //Assert
             Assert.Equal(actual, expected );
         }
-
-        
     }
 }

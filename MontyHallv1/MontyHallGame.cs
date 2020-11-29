@@ -6,6 +6,7 @@ namespace MontyHallv1
     public class MontyHallGame
     {
         public PrizeDoors PlayerSelection { get; set; }
+        public PrizeDoors? AnnouncersSelection { get; private set; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
         
         private Dictionary<PrizeDoors, string> _prizeStorage = new Dictionary<PrizeDoors, string>
@@ -45,6 +46,8 @@ namespace MontyHallv1
                     break;
                 }
             }
+
+            AnnouncersSelection = outputOfAnnouncersDoor.Value;
             return outputOfAnnouncersDoor.Value;
         }
         
@@ -57,7 +60,16 @@ namespace MontyHallv1
 
         public PrizeDoors ChangePlayerDoor()
         {
-            PlayerSelection = PlayerSelection == PrizeDoors.three ? PrizeDoors.two : PrizeDoors.three;
+            foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
+            {
+                if (entry == PlayerSelection || entry == AnnouncersSelection)
+                {
+                    continue;
+                }
+
+                PlayerSelection = entry;
+                break;
+            }
 
             return PlayerSelection;
         }

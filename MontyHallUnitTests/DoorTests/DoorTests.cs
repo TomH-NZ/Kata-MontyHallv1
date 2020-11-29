@@ -87,7 +87,7 @@ namespace MontyHallUnitTests
         public void AllowPlayerToChangeDoorToDoorThree()
         {
             //Arrange
-            var game = new MontyHallGame();
+            var game = new MontyHallGame(PrizeDoors.one, new StubForDoorTwoReturnsSerious());
             
             //Act
             game.ChangePlayerDoor();
@@ -116,6 +116,7 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var game = new MontyHallGame(PrizeDoors.two, new StubForDoorOneReturnsSerious());
+            game.AnnouncersDoor();
             
             //Act
             game.ChangePlayerDoor();
@@ -123,6 +124,19 @@ namespace MontyHallUnitTests
 
             //Assert
             Assert.Equal(PrizeDoors.one, actual);
+        }
+
+        [Fact]
+        public void AssignAnnouncersDoorToVariable()
+        {
+            //Arrange
+            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorThreeReturnsSerious());
+
+            //Act
+            game.AnnouncersDoor();
+
+            //Assert
+            Assert.Equal(PrizeDoors.one, game.AnnouncersSelection);
         }
     }
 }
