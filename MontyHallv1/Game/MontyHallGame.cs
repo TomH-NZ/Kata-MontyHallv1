@@ -15,13 +15,8 @@ namespace MontyHallv1
             {PrizeDoors.two, "joke"},
             {PrizeDoors.three, "joke"}
         };
-        
-        private Door Door { get; } = new Door();
+
         private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } = new RandomPrizeDoorAssigner();
-        
-        public MontyHallGame()
-        {
-        }
 
         public MontyHallGame(PrizeDoors playerSelection) 
         {
