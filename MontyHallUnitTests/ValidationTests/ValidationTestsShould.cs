@@ -7,29 +7,21 @@ namespace MontyHallUnitTests
 {
     public class ValidationTests
     {
-        [Fact]
-        public void ReturnTrueForChangeDoorInputValidation()
+        [Theory]
+        [InlineData("yes", true)]
+        [InlineData("no", true)]
+        [InlineData("y", false)]
+        [InlineData("n", false)]
+        [InlineData("orange", false)]
+        public void ReturnCorrectValueForChangeDoorInputValidator(string userEntry, bool outputValue)
         {
             //Arrange
             
             //Act
-            var actual = Validation.ChangeDoorValidator("yes");
+            var actual = Validation.ChangeDoorValidator(userEntry);
 
             //Assert
-            Assert.True(actual);
-        }
-
-        [Fact]
-        public void ReturnFalseForChangeDoorInputValidation()
-        {
-            //Arrange
-            
-            //Act
-            var actual = Validation.ChangeDoorValidator("y");
-
-            //Assert
-            Assert.False(actual);
-
+            Assert.Equal(outputValue, actual);
         }
         
         [Fact]
