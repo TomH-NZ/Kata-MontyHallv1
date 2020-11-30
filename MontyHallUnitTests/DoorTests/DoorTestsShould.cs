@@ -8,7 +8,7 @@ namespace MontyHallUnitTests
     public class DoorTests
     {
         [Fact]
-        public void ShowAJokePrizeWhenAnnouncerOpensADoor()
+        public void ShowAJokePrizeWhenAnnouncerOpensADoor() //TODO: unsure how to test this without saying 1 = 1
         {
             //Arrange
             var game = new MontyHallGame(PrizeDoors.two);
@@ -73,7 +73,7 @@ namespace MontyHallUnitTests
         }
 
         [Fact]
-        public void AssignAnnouncersDoorToVariable()  
+        public void AssignAnnouncersDoorToVariable() //TODO: Unsure how to test this correctly as it called the random assigner
         {
             //Arrange
             var game = new MontyHallGame(PrizeDoors.two);
