@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MontyHallv1;
 using Xunit;
 
-namespace MontyHallUnitTests // update tests to pass in stub value for random prize assigner.
+namespace MontyHallUnitTests 
 {
     public class DoorTests 
     {

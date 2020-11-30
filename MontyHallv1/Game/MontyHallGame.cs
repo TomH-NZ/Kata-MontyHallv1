@@ -75,7 +75,4 @@ namespace MontyHallv1
 }
 
 
-// TODO: Give player option to change door 
-// TODO: Open door to reveal prize 
-
  

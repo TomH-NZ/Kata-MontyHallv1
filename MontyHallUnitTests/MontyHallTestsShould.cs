@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MontyHallv1;
 using Xunit;
 
-namespace MontyHallUnitTests //TODO: split tests out to new classes depending on behaviour being tested.
+namespace MontyHallUnitTests 
 {
     public class GameUnitTests
     {
