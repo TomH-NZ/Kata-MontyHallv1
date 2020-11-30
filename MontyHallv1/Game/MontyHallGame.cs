@@ -34,7 +34,7 @@ namespace MontyHallv1
 
             var randomDoorValue = RandomPrizeDoorAssigner.PrizeDoor();
             
-            UpdatePrizeStorage(Validation.InputConversion(randomDoorValue));
+            UpdatePrizeStorage(randomDoorValue);
 
             foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {

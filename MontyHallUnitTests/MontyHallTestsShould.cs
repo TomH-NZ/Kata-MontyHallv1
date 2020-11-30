@@ -36,25 +36,25 @@ namespace MontyHallUnitTests
 
         private class StubForDoorOneReturnsSerious : IRandomPrizeDoorAssigner
         {
-            public string PrizeDoor()
+            public PrizeDoors PrizeDoor()
             {
-                return "one";
+                return PrizeDoors.one;
             }
         }
 
         private class StubForDoorTwoReturnsSerious : IRandomPrizeDoorAssigner
         {
-            public string PrizeDoor()
+            public PrizeDoors PrizeDoor()
             {
-                return "two";
+                return PrizeDoors.two;
             }
         }
 
         private class StubForDoorThreeReturnsSerious : IRandomPrizeDoorAssigner
         {
-            public string PrizeDoor()
+            public PrizeDoors PrizeDoor()
             {
-                return "three";
+                return PrizeDoors.three;
             }
         }
 
@@ -68,23 +68,23 @@ namespace MontyHallUnitTests
             //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
             return new List<object[]>
             {
-                new object[]{"one", "serious", stubOne },
-                new object[]{"two", "joke", stubOne},
-                new object[]{"three", "joke", stubOne},
+                new object[]{PrizeDoors.one, "serious", stubOne },
+                new object[]{PrizeDoors.two, "joke", stubOne},
+                new object[]{PrizeDoors.three, "joke", stubOne},
                 
-                new object[]{"one", "joke", stubTwo },
-                new object[]{"two", "serious", stubTwo},
-                new object[]{"three", "joke", stubTwo},
+                new object[]{PrizeDoors.one, "joke", stubTwo },
+                new object[]{PrizeDoors.two, "serious", stubTwo},
+                new object[]{PrizeDoors.three, "joke", stubTwo},
                 
-                new object[]{"one", "joke", stubThree },
-                new object[]{"two", "joke", stubThree},
-                new object[]{"three", "serious", stubThree}
+                new object[]{PrizeDoors.one, "joke", stubThree },
+                new object[]{PrizeDoors.two, "joke", stubThree},
+                new object[]{PrizeDoors.three, "serious", stubThree}
             };
         }
         
         [Theory]
         [MemberData(nameof(AssignRandomPrizeTestMember))]
-        public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(string door, string prize, IRandomPrizeDoorAssigner randomPrizeDoorAssigner)
+        public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(PrizeDoors door, string prize, IRandomPrizeDoorAssigner randomPrizeDoorAssigner)
         {
             //Arrange
             var doors = new Door();
