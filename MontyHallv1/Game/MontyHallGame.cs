@@ -5,9 +5,9 @@ namespace MontyHallv1
 {
     public class MontyHallGame
     {
-        public PrizeDoors PlayerSelection { get; set; }
+        public PrizeDoors PlayerSelection { get; private set; }
         public PrizeDoors? AnnouncersSelection { get; private set; }
-        public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; set; }
+        public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; private set; }
         
         private Dictionary<PrizeDoors, string> _prizeStorage = new Dictionary<PrizeDoors, string>
         {
