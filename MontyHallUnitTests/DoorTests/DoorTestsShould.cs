@@ -5,32 +5,8 @@ using Xunit;
 
 namespace MontyHallUnitTests 
 {
-    public class DoorTests 
+    public class DoorTests
     {
-        private class StubForDoorOneReturnsSerious : IRandomPrizeDoorAssigner
-        {
-            public string PrizeDoor()
-            {
-                return "one";
-            }
-        }
-
-        private class StubForDoorTwoReturnsSerious : IRandomPrizeDoorAssigner
-        {
-            public string PrizeDoor()
-            {
-                return "two";
-            }
-        }
-
-        private class StubForDoorThreeReturnsSerious : IRandomPrizeDoorAssigner
-        {
-            public string PrizeDoor()
-            {
-                return "three";
-            }
-        }
-        
         [Fact]
         public void ShowAJokePrizeWhenAnnouncerOpensADoor()
         {
@@ -46,11 +22,6 @@ namespace MontyHallUnitTests
         
         public static IEnumerable<object[]> PrizeDoorStorageTestMember()
         {
-            //Generates the stub object that is used by the data in the test.
-            var stubOne = new StubForDoorOneReturnsSerious();
-            var stubTwo = new StubForDoorTwoReturnsSerious();
-            var stubThree = new StubForDoorThreeReturnsSerious();
-            
             //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
             return new List<object[]>
             {
