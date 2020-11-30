@@ -5,7 +5,7 @@ using Xunit;
 
 namespace MontyHallUnitTests // update tests to pass in stub value for random prize assigner.
 {
-    public class DoorTests
+    public class DoorTests 
     {
         private class StubForDoorOneReturnsSerious : IRandomPrizeDoorAssigner
         {
@@ -82,54 +82,27 @@ namespace MontyHallUnitTests // update tests to pass in stub value for random pr
             //Assert
             Assert.Equal(prizeResult, actual);
         }
-        
-        [Fact]
-        public void AllowPlayerToChangeDoorToDoorThree()
+
+        [Theory]
+        [InlineData(PrizeDoors.two, PrizeDoors.three, PrizeDoors.one)]
+        [InlineData(PrizeDoors.three, PrizeDoors.one, PrizeDoors.two)]
+        [InlineData(PrizeDoors.one, PrizeDoors.two, PrizeDoors.three)]
+        public void AllowPlayerToChangeToUnselectedDoor(PrizeDoors playerSelection, PrizeDoors announcersSelection, PrizeDoors unselectedDoor)
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.one);
-            game.AnnouncersDoor();
+            var game = new MontyHallGame(playerSelection);
+            game.AnnouncersSelection = announcersSelection;
             
             //Act
             game.ChangePlayerDoor();
             var actual = game.PlayerSelection;
-
-            //Assert
-            Assert.Equal(PrizeDoors.three, actual);
-        }
-        
-        [Fact]
-        public void AllowPlayerToChangeDoorToDoorTwo()
-        {
-            //Arrange
-            var game = new MontyHallGame(PrizeDoors.three);
-            game.AnnouncersDoor();
             
-            //Act
-            game.ChangePlayerDoor();
-            var actual = game.PlayerSelection;
-
             //Assert
-            Assert.Equal(PrizeDoors.two, actual);
-        }
-        
-        [Fact]
-        public void AllowPlayerToChangeDoorToDoorOne()
-        {
-            //Arrange
-            var game = new MontyHallGame(PrizeDoors.two);
-            game.AnnouncersDoor();
-            
-            //Act
-            game.ChangePlayerDoor();
-            var actual = game.PlayerSelection;
-
-            //Assert
-            Assert.Equal(PrizeDoors.one, actual);
+            Assert.Equal(unselectedDoor, actual);
         }
 
         [Fact]
-        public void AssignAnnouncersDoorToVariable()
+        public void AssignAnnouncersDoorToVariable()  
         {
             //Arrange
             var game = new MontyHallGame(PrizeDoors.two);

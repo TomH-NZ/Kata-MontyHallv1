@@ -6,7 +6,7 @@ namespace MontyHallv1
     public class MontyHallGame
     {
         public PrizeDoors PlayerSelection { get; private set; }
-        public PrizeDoors? AnnouncersSelection { get; private set; }
+        public PrizeDoors? AnnouncersSelection { get; set; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; private set; }
         
         private Dictionary<PrizeDoors, string> _prizeStorage = new Dictionary<PrizeDoors, string>
@@ -16,19 +16,16 @@ namespace MontyHallv1
             {PrizeDoors.three, "joke"}
         };
         
-        //private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
         private Door Door { get; } = new Door();
-        private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } = new RandomPrizeDoorAssigner();// use this in place of the construtor paramter.
+        private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } = new RandomPrizeDoorAssigner();
         
         public MontyHallGame()
         {
-            //_randomPrizeDoorAssigner = new RandomPrizeDoorAssigner();
         }
 
-        public MontyHallGame(PrizeDoors playerSelection) // strip randomprizeassigner from input parameters and constructor internals
+        public MontyHallGame(PrizeDoors playerSelection) 
         {
             PlayerSelection = playerSelection;
-            //_randomPrizeDoorAssigner = prizeDoorAssigner;
         }
         
         public PrizeDoors AnnouncersDoor()
