@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using MontyHallv1;
 using Xunit;
 
-namespace MontyHallUnitTests
+namespace MontyHallUnitTests // update tests to pass in stub value for random prize assigner.
 {
     public class DoorTests
     {
@@ -35,7 +35,7 @@ namespace MontyHallUnitTests
         public void ShowAJokePrizeWhenAnnouncerOpensADoor()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorThreeReturnsSerious());
+            var game = new MontyHallGame(PrizeDoors.two);
 
             //Act
             var result = game.AnnouncersDoor();
@@ -54,26 +54,26 @@ namespace MontyHallUnitTests
             //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
             return new List<object[]>
             {
-                new object[] {PrizeDoors.one, PrizeDoors.one,  "serious", stubOne},
-                new object[] {PrizeDoors.two, PrizeDoors.one, "joke", stubOne},
-                new object[] {PrizeDoors.three, PrizeDoors.one, "joke", stubOne},
+                new object[] {PrizeDoors.one, PrizeDoors.one,  "serious"},
+                new object[] {PrizeDoors.two, PrizeDoors.one, "joke"},
+                new object[] {PrizeDoors.three, PrizeDoors.one, "joke"},
 
-                new object[] {PrizeDoors.one, PrizeDoors.two, "joke", stubTwo},
-                new object[] {PrizeDoors.two, PrizeDoors.two, "serious", stubTwo},
-                new object[] {PrizeDoors.three, PrizeDoors.two, "joke", stubTwo},
+                new object[] {PrizeDoors.one, PrizeDoors.two, "joke"},
+                new object[] {PrizeDoors.two, PrizeDoors.two, "serious"},
+                new object[] {PrizeDoors.three, PrizeDoors.two, "joke"},
 
-                new object[] {PrizeDoors.one, PrizeDoors.three, "joke", stubThree},
-                new object[] {PrizeDoors.two, PrizeDoors.three, "joke", stubThree},
-                new object[] {PrizeDoors.three, PrizeDoors.three, "serious", stubThree}
+                new object[] {PrizeDoors.one, PrizeDoors.three, "joke"},
+                new object[] {PrizeDoors.two, PrizeDoors.three, "joke"},
+                new object[] {PrizeDoors.three, PrizeDoors.three, "serious"}
             };
         }
         
         [Theory] 
         [MemberData(nameof(PrizeDoorStorageTestMember))]
-        public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors testedDoor, PrizeDoors actualPrize, string prizeResult, IRandomPrizeDoorAssigner randomPrizeDoorAssigner)
+        public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors testedDoor, PrizeDoors actualPrize, string prizeResult)
         {
             //Arrange
-            var game = new MontyHallGame(testedDoor, randomPrizeDoorAssigner);
+            var game = new MontyHallGame(testedDoor);
             
             //Act
             game.UpdatePrizeStorage(actualPrize);
@@ -87,7 +87,7 @@ namespace MontyHallUnitTests
         public void AllowPlayerToChangeDoorToDoorThree()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.one, new StubForDoorThreeReturnsSerious());
+            var game = new MontyHallGame(PrizeDoors.one);
             game.AnnouncersDoor();
             
             //Act
@@ -102,7 +102,7 @@ namespace MontyHallUnitTests
         public void AllowPlayerToChangeDoorToDoorTwo()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.three, new StubForDoorTwoReturnsSerious());
+            var game = new MontyHallGame(PrizeDoors.three);
             game.AnnouncersDoor();
             
             //Act
@@ -114,10 +114,10 @@ namespace MontyHallUnitTests
         }
         
         [Fact]
-        public void AllowPlayerToChangeDoorToDoorOne() // use ugly code to get this test passing.
+        public void AllowPlayerToChangeDoorToDoorOne()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorOneReturnsSerious());
+            var game = new MontyHallGame(PrizeDoors.two);
             game.AnnouncersDoor();
             
             //Act
@@ -132,7 +132,7 @@ namespace MontyHallUnitTests
         public void AssignAnnouncersDoorToVariable()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorThreeReturnsSerious());
+            var game = new MontyHallGame(PrizeDoors.two);
 
             //Act
             game.AnnouncersDoor();

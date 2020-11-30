@@ -6,20 +6,21 @@ namespace MontyHallv1
     {
         public void Game()
         {
-            Console.WriteLine("Welcome to Monty Hall \n");
             var isValidUserDoorSelectionInput = false;
             var enteredDoor = "";
             var isValidUserChangeDoorInput = false;
             var changeDoor = "";
+            
+            Console.WriteLine("Welcome to Monty Hall \n");
             
             while (!isValidUserDoorSelectionInput)
             {
                 Console.WriteLine($"Please choose a door: {PrizeDoors.one}, {PrizeDoors.two}, {PrizeDoors.three}");
                 enteredDoor = Console.ReadLine();
                 
-                isValidUserDoorSelectionInput = Validation.UserEntry(enteredDoor);
+                isValidUserDoorSelectionInput = Validation.UserEntry(enteredDoor); //use naming consistency, UserEntryValidator.
             }
-            var montyGame = new MontyHallGame(Validation.InputConversion(enteredDoor), new RandomPrizeDoorAssigner());
+            var montyGame = new MontyHallGame(Validation.InputConversion(enteredDoor));
             var announcersChosenDoor = montyGame.AnnouncersDoor();
             
             Console.WriteLine($"You selected door {montyGame.PlayerSelection}");

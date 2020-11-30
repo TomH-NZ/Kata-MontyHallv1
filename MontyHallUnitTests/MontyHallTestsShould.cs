@@ -24,7 +24,7 @@ namespace MontyHallUnitTests //TODO: split tests out to new classes depending on
         {
             //Arrange
             var randomPrizeDoorAssigner= new RandomPrizeDoorAssigner();
-            var montyHallGame = new MontyHallGame(PrizeDoors.one, randomPrizeDoorAssigner );
+            var montyHallGame = new MontyHallGame(PrizeDoors.one );
             
             //Act
             var result = montyHallGame.PlayerSelection;

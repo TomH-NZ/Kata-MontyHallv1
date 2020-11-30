@@ -16,25 +16,26 @@ namespace MontyHallv1
             {PrizeDoors.three, "joke"}
         };
         
-        private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
+        //private readonly IRandomPrizeDoorAssigner _randomPrizeDoorAssigner;
         private Door Door { get; } = new Door();
+        private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } = new RandomPrizeDoorAssigner();// use this in place of the construtor paramter.
         
         public MontyHallGame()
         {
-            _randomPrizeDoorAssigner = new RandomPrizeDoorAssigner();
+            //_randomPrizeDoorAssigner = new RandomPrizeDoorAssigner();
         }
 
-        public MontyHallGame(PrizeDoors playerSelection, IRandomPrizeDoorAssigner prizeDoorAssigner)
+        public MontyHallGame(PrizeDoors playerSelection) // strip randomprizeassigner from input parameters and constructor internals
         {
             PlayerSelection = playerSelection;
-            _randomPrizeDoorAssigner = prizeDoorAssigner;
+            //_randomPrizeDoorAssigner = prizeDoorAssigner;
         }
         
         public PrizeDoors AnnouncersDoor()
         {
             PrizeDoors? outputOfAnnouncersDoor = null;
 
-            var randomDoorValue = _randomPrizeDoorAssigner.PrizeDoor();
+            var randomDoorValue = RandomPrizeDoorAssigner.PrizeDoor();
             
             UpdatePrizeStorage(Validation.InputConversion(randomDoorValue));
 
