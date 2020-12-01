@@ -8,17 +8,17 @@ namespace MontyHallUnitTests
     public class DoorTests
     {
         [Fact]
-        public void ShowAJokePrizeWhenAnnouncerOpensADoor() //TODO: unsure how to test this without saying 1 = 1
+        public void ShowAJokePrizeWhenAnnouncerOpensADoor() 
         {
             //Arrange
             var game = new MontyHallGame(PrizeDoors.two);
 
             //Act
-            var result = game.AnnouncersDoor();
+            game.AnnouncersDoor();
+            var actual = game.DoorPrizeStorage[game.AnnouncersSelection.Value];
 
             //Assert
-            Assert.Equal(PrizeDoors.one, result); //Assert does not equal prizedoor.two
-            // also assert tht the returned value is joke, rahter than getting the door number. pass update to updatedoorstorage
+            Assert.Equal("joke", actual);
         }
         
         public static IEnumerable<object[]> PrizeDoorStorageTestMember()
@@ -55,25 +55,22 @@ namespace MontyHallUnitTests
             Assert.Equal(prizeResult, actual);
         }
 
-        [Theory] //ToDo: change to Fact as the [inlinedata] duplicates the test
-        [InlineData(PrizeDoors.two, PrizeDoors.three, PrizeDoors.one)]
-        [InlineData(PrizeDoors.three, PrizeDoors.one, PrizeDoors.two)]
-        [InlineData(PrizeDoors.one, PrizeDoors.two, PrizeDoors.three)]
-        public void AllowPlayerToChangeToUnselectedDoor(PrizeDoors playerSelection, PrizeDoors announcersSelection, PrizeDoors unselectedDoor)
+        [Fact]
+        public void AllowPlayerToChangeToUnselectedDoor()
         {
             //Arrange
-            var game = new MontyHallGame(playerSelection);
-            game.AnnouncersSelection = announcersSelection;
-            
+            var game = new MontyHallGame(PrizeDoors.one);
+            game.AnnouncersSelection = PrizeDoors.two;
+
             //Act
             game.ChangePlayerDoor();
             var actual = game.PlayerSelection;
-            
+
             //Assert
-            Assert.Equal(unselectedDoor, actual);
+            Assert.Equal(PrizeDoors.three, actual);
         }
 
-        [Fact]
+        [Fact (Skip = "unable to test")]
         public void AssignAnnouncersDoorToVariable() //delete test, not testable.
         {
             //Arrange

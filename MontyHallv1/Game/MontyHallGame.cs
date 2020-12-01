@@ -9,18 +9,17 @@ namespace MontyHallv1
         public PrizeDoors? AnnouncersSelection { get; set; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; private set; }
         
-        private Dictionary<PrizeDoors, string> _prizeStorage = new Dictionary<PrizeDoors, string>
-        {
-            {PrizeDoors.one, "joke"},
-            {PrizeDoors.two, "joke"},
-            {PrizeDoors.three, "joke"}
-        };
-
         private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } = new RandomPrizeDoorAssigner();
 
         public MontyHallGame(PrizeDoors playerSelection) 
         {
             PlayerSelection = playerSelection;
+            DoorPrizeStorage = new Dictionary<PrizeDoors, string>
+            {
+                {PrizeDoors.one, "joke"},
+                {PrizeDoors.two, "joke"},
+                {PrizeDoors.three, "joke"}
+            };
         }
         
         public PrizeDoors AnnouncersDoor()
@@ -46,8 +45,6 @@ namespace MontyHallv1
         
         public void UpdatePrizeStorage(PrizeDoors prizeDoor)
         {
-            DoorPrizeStorage = _prizeStorage;
-            
             DoorPrizeStorage[prizeDoor] = "serious";
         }
 
