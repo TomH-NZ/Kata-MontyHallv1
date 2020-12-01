@@ -1,6 +1,6 @@
 using System;
 
-namespace MontyHallv1
+namespace MontyHallv1 // look at possibly reintroducing randomassigner into montyhall constructor.
 {
     public class UserInterface
     {
