@@ -87,26 +87,12 @@ namespace MontyHallUnitTests
         public void ShowAPrizeWhenAWinningDoorIsSelectedWithMemberData(PrizeDoors door, string prize, IRandomPrizeDoorAssigner randomPrizeDoorAssigner)
         {
             //Arrange
-            var doors = new Door();
 
             //Act
-            var result = doors.AssignRandomPrize(door, randomPrizeDoorAssigner);
+            var result = Door.AssignRandomPrize(door, randomPrizeDoorAssigner);
 
             //Assert
             Assert.Equal(prize, result);
-        }
-
-        [Fact]
-        public void ShowIfTheDoorIsOpen()
-        {
-            //Arrange
-            var doors = new Door();
-
-            //Act
-            var result = doors.OpenStatus("one");
-
-            //Assert
-            Assert.True(result);
         }
 
         [Theory]
@@ -118,7 +104,7 @@ namespace MontyHallUnitTests
             //Arrange
             
             //Act
-            var actual = Validation.InputConversion(userInput);
+            var actual = Validation.UserInputConversion(userInput);
 
             //Assert
             Assert.Equal(actual, expected );

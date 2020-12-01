@@ -17,7 +17,8 @@ namespace MontyHallUnitTests
             var result = game.AnnouncersDoor();
 
             //Assert
-            Assert.Equal(PrizeDoors.one, result);
+            Assert.Equal(PrizeDoors.one, result); //Assert does not equal prizedoor.two
+            // also assert tht the returned value is joke, rahter than getting the door number. pass update to updatedoorstorage
         }
         
         public static IEnumerable<object[]> PrizeDoorStorageTestMember()
@@ -54,7 +55,7 @@ namespace MontyHallUnitTests
             Assert.Equal(prizeResult, actual);
         }
 
-        [Theory]
+        [Theory] //ToDo: change to Fact as the [inlinedata] duplicates the test
         [InlineData(PrizeDoors.two, PrizeDoors.three, PrizeDoors.one)]
         [InlineData(PrizeDoors.three, PrizeDoors.one, PrizeDoors.two)]
         [InlineData(PrizeDoors.one, PrizeDoors.two, PrizeDoors.three)]
@@ -73,7 +74,7 @@ namespace MontyHallUnitTests
         }
 
         [Fact]
-        public void AssignAnnouncersDoorToVariable() //TODO: Unsure how to test this correctly as it called the random assigner
+        public void AssignAnnouncersDoorToVariable() //delete test, not testable.
         {
             //Arrange
             var game = new MontyHallGame(PrizeDoors.two);

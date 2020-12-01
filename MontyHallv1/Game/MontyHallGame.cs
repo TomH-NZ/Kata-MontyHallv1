@@ -6,7 +6,7 @@ namespace MontyHallv1
     public class MontyHallGame
     {
         public PrizeDoors PlayerSelection { get; private set; }
-        public PrizeDoors? AnnouncersSelection { get; set; } //TODO: Want to assign to Private, unsure how to test correctly
+        public PrizeDoors? AnnouncersSelection { get; set; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; private set; }
         
         private Dictionary<PrizeDoors, string> _prizeStorage = new Dictionary<PrizeDoors, string>
@@ -27,9 +27,9 @@ namespace MontyHallv1
         {
             PrizeDoors? outputOfAnnouncersDoor = null;
 
-            var randomDoorValue = RandomPrizeDoorAssigner.PrizeDoor();
+            var seriousPrizeDoor = RandomPrizeDoorAssigner.PrizeDoor();
             
-            UpdatePrizeStorage(randomDoorValue);
+            UpdatePrizeStorage(seriousPrizeDoor);
 
             foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {

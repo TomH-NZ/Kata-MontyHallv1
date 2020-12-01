@@ -4,7 +4,7 @@ namespace MontyHallv1
 {
     public class RandomPrizeDoorAssigner : IRandomPrizeDoorAssigner
     {
-        public PrizeDoors PrizeDoor() //TODO: switch statement doesn't have a default option.  How to set this up?? 
+        public PrizeDoors PrizeDoor()  
         {
             var prizeDoor = new Random().Next(1, 4) switch
             {

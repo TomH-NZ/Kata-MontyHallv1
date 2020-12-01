@@ -6,32 +6,32 @@ namespace MontyHallv1
     {
         public void Game()
         {
-            var isValidUserDoorSelectionInput = false;
-            var enteredDoor = "";
-            var isValidUserChangeDoorInput = false;
+            var isValidUserDoorSelection = false;
+            var enteredUserSelection = "";
+            var isValidChangeDoorInput = false;
             var changeDoor = "";
             
             Console.WriteLine("Welcome to Monty Hall \n");
             
-            while (!isValidUserDoorSelectionInput)
+            while (!isValidUserDoorSelection)
             {
                 Console.WriteLine($"Please choose a door: {PrizeDoors.one}, {PrizeDoors.two}, {PrizeDoors.three}");
-                enteredDoor = Console.ReadLine();
+                enteredUserSelection = Console.ReadLine();
                 
-                isValidUserDoorSelectionInput = Validation.UserEntry(enteredDoor); //use naming consistency, UserEntryValidator.
+                isValidUserDoorSelection = Validation.UserEntryValidator(enteredUserSelection);
             }
-            var montyGame = new MontyHallGame(Validation.InputConversion(enteredDoor));
+            var montyGame = new MontyHallGame(Validation.UserInputConversion(enteredUserSelection));
             var announcersChosenDoor = montyGame.AnnouncersDoor();
             
             Console.WriteLine($"You selected door {montyGame.PlayerSelection}");
             Console.WriteLine($"Monty has opened door {announcersChosenDoor} to show a {montyGame.DoorPrizeStorage[announcersChosenDoor]} prize! \n");
             
-            while (!isValidUserChangeDoorInput)
+            while (!isValidChangeDoorInput)
             {
                 Console.WriteLine("Do you wish to change doors? Yes/No");
                 changeDoor = Console.ReadLine();
 
-                isValidUserChangeDoorInput = Validation.ChangeDoorValidator(changeDoor);
+                isValidChangeDoorInput = Validation.ChangeDoorValidator(changeDoor);
             }
             
             if (changeDoor.ToLower() == "yes")

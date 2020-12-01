@@ -3,27 +3,11 @@ using System.Collections.Generic;
 
 namespace MontyHallv1
 {
-    public class Door
+    public static class Door
     {
-        public Door()
-        {
-        }
-
-        public string AssignRandomPrize(PrizeDoors selectedDoor, IRandomPrizeDoorAssigner prizeDoor)
+        public static string AssignRandomPrize(PrizeDoors selectedDoor, IRandomPrizeDoorAssigner prizeDoor)
         {
             return selectedDoor == prizeDoor.PrizeDoor() ? "serious" : "joke";
-        }
-        
-        Dictionary<string, bool> _openDoorStatus = new Dictionary<string, bool>
-        {
-            {"one", true},
-            {"two", false},
-            {"three", false}
-        };
-        
-        public bool OpenStatus(string playerSelectedDoor)
-        {
-            return _openDoorStatus[playerSelectedDoor];
         }
     }
 }

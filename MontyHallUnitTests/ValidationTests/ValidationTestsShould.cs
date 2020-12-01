@@ -30,7 +30,7 @@ namespace MontyHallUnitTests
             //Arrange
 
             //Act
-            var enumValue = Validation.UserEntry("one");
+            var enumValue = Validation.UserEntryValidator("one");
 
             //Assert
             Assert.True(enumValue);
@@ -42,7 +42,7 @@ namespace MontyHallUnitTests
             //Arrange
 
             //Act
-            var actual = Validation.UserEntry("tree");
+            var actual = Validation.UserEntryValidator("tree");
 
             //Assert
             Assert.False(actual);
