@@ -7,7 +7,7 @@ namespace MontyHallv1
     {
         public PrizeDoors PlayerSelection { get; private set; }
         public PrizeDoors? AnnouncersSelection { get; set; }
-        public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; private set; }
+        public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; }
         
         private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } = new RandomPrizeDoorAssigner();
 
@@ -24,23 +24,18 @@ namespace MontyHallv1
         
         public PrizeDoors AnnouncersDoor()
         {
-            PrizeDoors? outputOfAnnouncersDoor = null;
-
-            var seriousPrizeDoor = RandomPrizeDoorAssigner.PrizeDoor();
-            
-            UpdatePrizeStorage(seriousPrizeDoor);
+            UpdatePrizeStorage(RandomPrizeDoorAssigner.PrizeDoor());
 
             foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {
                 if (entry != PlayerSelection && DoorPrizeStorage[entry] == "joke")
                 {
-                    outputOfAnnouncersDoor = entry;
+                    AnnouncersSelection = entry;
                     break;
                 }
             }
 
-            AnnouncersSelection = outputOfAnnouncersDoor.Value;
-            return outputOfAnnouncersDoor.Value;
+            return AnnouncersSelection.Value;
         }
         
         public void UpdatePrizeStorage(PrizeDoors prizeDoor)
