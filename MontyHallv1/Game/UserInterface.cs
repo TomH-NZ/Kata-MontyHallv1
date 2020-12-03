@@ -48,8 +48,3 @@ namespace MontyHallv1 // look at possibly reintroducing randomassigner into mont
         }
     }
 }
-
-/*Console.WriteLine($"Door One: {montyGame.DoorPrizeStorage[PrizeDoors.one]}");
- Console.WriteLine($"Door Two: {montyGame.DoorPrizeStorage[PrizeDoors.two]}");
- Console.WriteLine($"Door Three: {montyGame.DoorPrizeStorage[PrizeDoors.three]}");
- Console.WriteLine($"Player Selection: {montyGame.PlayerSelection}");*/
