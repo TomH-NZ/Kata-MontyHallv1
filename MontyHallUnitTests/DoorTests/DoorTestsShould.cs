@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using MontyHallv1;
+using MontyHallv1.Enums;
+using MontyHallv1.Game;
 using Xunit;
 
 namespace MontyHallUnitTests 

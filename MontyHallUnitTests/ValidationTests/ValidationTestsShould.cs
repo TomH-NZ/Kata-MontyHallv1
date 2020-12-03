@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using MontyHallv1;
+using MontyHallv1.Validation;
 using Xunit;
 
 namespace MontyHallUnitTests

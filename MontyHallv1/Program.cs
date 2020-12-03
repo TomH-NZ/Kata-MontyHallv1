@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using MontyHallv1.Game;
 
 namespace MontyHallv1
 {

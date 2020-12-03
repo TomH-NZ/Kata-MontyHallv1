@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using MontyHallv1.Enums;
+using MontyHallv1.Interfaces;
 
 namespace MontyHallv1
 {

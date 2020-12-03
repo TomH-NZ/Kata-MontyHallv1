@@ -1,4 +1,6 @@
-namespace MontyHallv1
+using MontyHallv1.Enums;
+
+namespace MontyHallv1.Interfaces
 {
     public interface IRandomPrizeDoorAssigner
     {

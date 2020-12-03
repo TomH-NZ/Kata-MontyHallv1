@@ -1,6 +1,7 @@
 using System;
+using MontyHallv1.Enums;
 
-namespace MontyHallv1 // look at possibly reintroducing randomassigner into montyhall constructor
+namespace MontyHallv1.Game
 {
     public class UserInterface
     {
@@ -18,9 +19,9 @@ namespace MontyHallv1 // look at possibly reintroducing randomassigner into mont
                 Console.WriteLine($"Please choose a door: {PrizeDoors.one}, {PrizeDoors.two}, {PrizeDoors.three}");
                 enteredUserSelection = Console.ReadLine();
                 
-                isValidUserDoorSelection = Validation.UserEntryValidator(enteredUserSelection);
+                isValidUserDoorSelection = Validation.Validation.UserEntryValidator(enteredUserSelection);
             }
-            var montyGame = new MontyHallGame(Validation.UserInputConversion(enteredUserSelection));
+            var montyGame = new MontyHallGame(Validation.Validation.UserInputConversion(enteredUserSelection));
             var announcersChosenDoor = montyGame.AnnouncersDoor();
             
             Console.WriteLine($"You selected door {montyGame.PlayerSelection}");
@@ -31,7 +32,7 @@ namespace MontyHallv1 // look at possibly reintroducing randomassigner into mont
                 Console.WriteLine("Do you wish to change doors? Yes/No");
                 changeDoor = Console.ReadLine();
 
-                isValidChangeDoorInput = Validation.ChangeDoorValidator(changeDoor);
+                isValidChangeDoorInput = Validation.Validation.ChangeDoorValidator(changeDoor);
             }
             
             if (changeDoor.ToLower() == "yes")

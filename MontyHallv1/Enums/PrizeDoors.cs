@@ -1,4 +1,4 @@
-namespace MontyHallv1
+namespace MontyHallv1.Enums
 {
     public enum PrizeDoors
         {

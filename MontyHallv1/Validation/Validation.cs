@@ -1,6 +1,7 @@
 using System;
+using MontyHallv1.Enums;
 
-namespace MontyHallv1
+namespace MontyHallv1.Validation
 {
     public static class Validation
     {

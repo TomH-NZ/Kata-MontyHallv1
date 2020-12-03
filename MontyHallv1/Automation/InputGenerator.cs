@@ -1,13 +1,15 @@
 using System;
+using MontyHallv1.Enums;
+using MontyHallv1.Interfaces;
 
 namespace MontyHallv1.Automation
 {
-    public class InputGenerator
+    public class InputGenerator : IInputGenerator
     {
-        public string yes = "yes";
-        public string no = "no";
-        
-        public PrizeDoors PlayerDoor()
+        public string Yes = "yes";
+        public string No = "no";
+
+        public PrizeDoors PlayerSelection()
         {
             var selectedDoor = new Random().Next(1, 4) switch
             {
