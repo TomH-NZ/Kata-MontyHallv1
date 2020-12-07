@@ -11,5 +11,15 @@ namespace MontyHallv1.MoqTestFolder
         {
             return value > 5;
         }
+
+        public string TestReturn()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public string HelloWorld()
+        {
+            return "Hello world?";
+        }
     }
 }

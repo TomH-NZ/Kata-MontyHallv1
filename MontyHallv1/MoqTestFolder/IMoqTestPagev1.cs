@@ -4,5 +4,6 @@ namespace MontyHallv1.MoqTestFolder
     {
         int PlusOneAddition(int first);
         bool Greater(int value);
+        string TestReturn();
     }
 }

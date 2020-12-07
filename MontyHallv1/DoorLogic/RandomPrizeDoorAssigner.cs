@@ -2,7 +2,7 @@ using System;
 using MontyHallv1.Enums;
 using MontyHallv1.Interfaces;
 
-namespace MontyHallv1
+namespace MontyHallv1.DoorLogic
 {
     public class RandomPrizeDoorAssigner : IRandomPrizeDoorAssigner
     {
