@@ -13,3 +13,5 @@ namespace MontyHallv1.MoqTestFolder
         }
     }
 }
+
+//https://github.com/Moq/moq4/wiki/Quickstart
