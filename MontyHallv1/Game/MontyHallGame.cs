@@ -43,7 +43,6 @@ namespace MontyHallv1.Game
             var prizeDoor = RandomPrizeDoorAssigner.PrizeDoor();
             
             DoorPrizeStorage[prizeDoor] = "serious";
-            //DoorPrizeStorage[RandomPrizeDoorAssigner.PrizeDoor()] = "serious";
             //TODO: how to test this?  Using Moq?
         }
 
