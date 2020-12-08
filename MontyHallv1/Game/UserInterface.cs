@@ -22,6 +22,7 @@ namespace MontyHallv1.Game
                 isValidUserDoorSelection = Validation.Validation.UserEntryValidator(enteredUserSelection);
             }
             var montyGame = new MontyHallGame(Validation.Validation.UserInputConversion(enteredUserSelection));
+            montyGame.UpdatePrizeStorage();
             var announcersChosenDoor = montyGame.AnnouncersDoor();
             
             Console.WriteLine($"You selected door {montyGame.PlayerSelection}");

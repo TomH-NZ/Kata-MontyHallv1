@@ -24,9 +24,11 @@ namespace MontyHallv1.Game
             };
         }
         
-        public PrizeDoors AnnouncersDoor()
+        public PrizeDoors AnnouncersDoor() 
         {
-            UpdatePrizeStorage(RandomPrizeDoorAssigner.PrizeDoor());
+            //UpdatePrizeStorage(RandomPrizeDoorAssigner.PrizeDoor()); //breaks command query separation
+            //TODO: how to move the above process outside this method? Moving it to the UserInterface class creates errors
+            //TODO: related to static method.
 
             foreach (PrizeDoors entry in Enum.GetValues(typeof(PrizeDoors)))
             {
@@ -40,9 +42,12 @@ namespace MontyHallv1.Game
             return AnnouncersSelection.Value;
         }
         
-        public void UpdatePrizeStorage(PrizeDoors prizeDoor)
+        //public void UpdatePrizeStorage(PrizeDoors prizeDoor)
+        public void UpdatePrizeStorage()
         {
-            DoorPrizeStorage[prizeDoor] = "serious";
+            //var prizeDoor = RandomPrizeDoorAssigner.PrizeDoor();
+            //DoorPrizeStorage[prizeDoor] = "serious";
+            DoorPrizeStorage[RandomPrizeDoorAssigner.PrizeDoor()] = "serious";
         }
 
         public PrizeDoors ChangePlayerDoor()
