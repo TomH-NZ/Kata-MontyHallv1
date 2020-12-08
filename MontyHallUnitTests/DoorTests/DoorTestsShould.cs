@@ -1,20 +1,43 @@
-using System;
 using System.Collections.Generic;
 using MontyHallv1;
 using MontyHallv1.Enums;
 using MontyHallv1.Game;
+using MontyHallv1.Interfaces;
 using Xunit;
-using Moq;
 
-namespace MontyHallUnitTests 
+namespace MontyHallUnitTests.DoorTests 
 {
     public class DoorTests
     {
+        
+        private class StubForDoorOne : IRandomPrizeDoorAssigner
+        {
+            public PrizeDoors PrizeDoor()
+            {
+                return PrizeDoors.one;
+            }
+        }
+
+        private class StubForDoorTwo : IRandomPrizeDoorAssigner
+        {
+            public PrizeDoors PrizeDoor()
+            {
+                return PrizeDoors.two;
+            }
+        }
+
+        private class StubForDoorThree : IRandomPrizeDoorAssigner
+        {
+            public PrizeDoors PrizeDoor()
+            {
+                return PrizeDoors.three;
+            }
+        }
         [Fact]
         public void ShowAJokePrizeWhenAnnouncerOpensADoor() 
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two, new RandomPrizeDoorAssigner()); //use moq to pass in correct door or use a stub
+            var game = new MontyHallGame(PrizeDoors.two, new StubForDoorOne()); //use moq to pass in correct door or use a stub
 
             //Act
             game.AnnouncersDoor();
@@ -24,34 +47,78 @@ namespace MontyHallUnitTests
             Assert.Equal("joke", actual);
         }
         
-        public static IEnumerable<object[]> PrizeDoorStorageTestMember()
+        public static IEnumerable<object[]> PrizeDoorStorageTestMemberDoorOneSerious()
         {
             //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
             return new List<object[]>
             {
-                new object[] {PrizeDoors.one, PrizeDoors.one,  "serious"},
-                new object[] {PrizeDoors.two, PrizeDoors.one, "joke"},
-                new object[] {PrizeDoors.three, PrizeDoors.one, "joke"},
-
-                new object[] {PrizeDoors.one, PrizeDoors.two, "joke"},
-                new object[] {PrizeDoors.two, PrizeDoors.two, "serious"},
-                new object[] {PrizeDoors.three, PrizeDoors.two, "joke"},
-
-                new object[] {PrizeDoors.one, PrizeDoors.three, "joke"},
-                new object[] {PrizeDoors.two, PrizeDoors.three, "joke"},
-                new object[] {PrizeDoors.three, PrizeDoors.three, "serious"}
+                new object[] {PrizeDoors.one, "serious"},
+                new object[] {PrizeDoors.two, "joke"},
+                new object[] {PrizeDoors.three, "joke"},
             };
         }
         
-        [Theory (Skip = "Temporary skip while testing code change")] 
-        [MemberData(nameof(PrizeDoorStorageTestMember))]
-        public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors testedDoor, PrizeDoors actualPrize, string prizeResult)
+        [Theory] 
+        [MemberData(nameof(PrizeDoorStorageTestMemberDoorOneSerious))]
+        public void ReturnSeriousPrizeFromPrizeStorageDoorOneTheory(PrizeDoors testedDoor, string prizeResult)
         {
             //Arrange
-            var game = new MontyHallGame(testedDoor, new RandomPrizeDoorAssigner());
+            var game = new MontyHallGame(testedDoor, new StubForDoorOne());
             
             //Act
-            //game.UpdatePrizeStorage(actualPrize);
+            game.UpdatePrizeStorage();
+            var actual = game.DoorPrizeStorage[testedDoor];
+            
+            //Assert
+            Assert.Equal(prizeResult, actual);
+        }
+        
+        public static IEnumerable<object[]> PrizeDoorStorageTestMemberDoorTwoSerious()
+        {
+            //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
+            return new List<object[]>
+            {
+                new object[] {PrizeDoors.one, "joke"},
+                new object[] {PrizeDoors.two, "serious"},
+                new object[] {PrizeDoors.three, "joke"},
+            };
+        }
+        
+        [Theory] 
+        [MemberData(nameof(PrizeDoorStorageTestMemberDoorTwoSerious))]
+        public void ReturnSeriousPrizeFromPrizeStorageDoorTwoTheory(PrizeDoors testedDoor, string prizeResult)
+        {
+            //Arrange
+            var game = new MontyHallGame(testedDoor, new StubForDoorTwo());
+            
+            //Act
+            game.UpdatePrizeStorage();
+            var actual = game.DoorPrizeStorage[testedDoor];
+            
+            //Assert
+            Assert.Equal(prizeResult, actual);
+        }
+        
+        public static IEnumerable<object[]> PrizeDoorStorageTestMemberDoorThreeSerious()
+        {
+            //This creates the data that is to be tested, similar to the [Theory] InlineData tests.
+            return new List<object[]>
+            {
+                new object[] {PrizeDoors.one, "joke"},
+                new object[] {PrizeDoors.two, "joke"},
+                new object[] {PrizeDoors.three, "serious"}
+            };
+        }
+        
+        [Theory] 
+        [MemberData(nameof(PrizeDoorStorageTestMemberDoorThreeSerious))]
+        public void ReturnSeriousPrizeFromPrizeStorageDoorThreeTheory(PrizeDoors testedDoor, string prizeResult)
+        {
+            //Arrange
+            var game = new MontyHallGame(testedDoor, new StubForDoorThree());
+            
+            //Act
+            game.UpdatePrizeStorage();
             var actual = game.DoorPrizeStorage[testedDoor];
             
             //Assert
