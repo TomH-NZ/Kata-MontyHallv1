@@ -20,5 +20,17 @@ namespace MontyHallv1.Automation
 
             return selectedDoor;
         }
+
+        public PrizeDoors AnnouncerDoor()
+        {
+            var selectedDoor = new Random().Next(1, 4) switch
+            {
+                1 => PrizeDoors.one,
+                2 => PrizeDoors.two,
+                3 => PrizeDoors.three
+            };
+
+            return selectedDoor;
+        }
     }
 }

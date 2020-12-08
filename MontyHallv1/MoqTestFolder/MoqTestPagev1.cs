@@ -1,7 +1,12 @@
+using MontyHallv1.Enums;
+
 namespace MontyHallv1.MoqTestFolder
 {
     public class MoqTestPagev1 : IMoqTestPagev1
     {
+        public string playerName { get; set; }
+        public PrizeDoors playerDoor { get; set; }
+
         public int PlusOneAddition(int first)
         {
             return first + 1;

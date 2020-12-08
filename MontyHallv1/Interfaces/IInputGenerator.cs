@@ -5,5 +5,7 @@ namespace MontyHallv1.Interfaces
     public interface IInputGenerator
     {
         PrizeDoors PlayerSelection();
+
+        PrizeDoors AnnouncerDoor();
     }
 }
