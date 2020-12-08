@@ -40,7 +40,10 @@ namespace MontyHallv1.Game
         
         public void UpdatePrizeStorage()
         {
-            DoorPrizeStorage[RandomPrizeDoorAssigner.PrizeDoor()] = "serious";
+            var prizeDoor = RandomPrizeDoorAssigner.PrizeDoor();
+            
+            DoorPrizeStorage[prizeDoor] = "serious";
+            //DoorPrizeStorage[RandomPrizeDoorAssigner.PrizeDoor()] = "serious";
             //TODO: how to test this?  Using Moq?
         }
 
