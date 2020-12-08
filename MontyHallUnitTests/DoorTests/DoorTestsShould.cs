@@ -4,6 +4,7 @@ using MontyHallv1;
 using MontyHallv1.Enums;
 using MontyHallv1.Game;
 using Xunit;
+using Moq;
 
 namespace MontyHallUnitTests 
 {
