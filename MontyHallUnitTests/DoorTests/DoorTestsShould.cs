@@ -14,7 +14,7 @@ namespace MontyHallUnitTests
         public void ShowAJokePrizeWhenAnnouncerOpensADoor() 
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two);
+            var game = new MontyHallGame(PrizeDoors.two, new RandomPrizeDoorAssigner()); //use moq to pass in correct door or use a stub
 
             //Act
             game.AnnouncersDoor();
@@ -48,7 +48,7 @@ namespace MontyHallUnitTests
         public void ReturnCorrectPrizeFromDoorPrizeStorageTheory(PrizeDoors testedDoor, PrizeDoors actualPrize, string prizeResult)
         {
             //Arrange
-            var game = new MontyHallGame(testedDoor);
+            var game = new MontyHallGame(testedDoor, new RandomPrizeDoorAssigner());
             
             //Act
             //game.UpdatePrizeStorage(actualPrize);
@@ -62,7 +62,7 @@ namespace MontyHallUnitTests
         public void AllowPlayerToChangeToUnselectedDoor()
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.one);
+            var game = new MontyHallGame(PrizeDoors.one, new RandomPrizeDoorAssigner());
             game.AnnouncersSelection = PrizeDoors.two;
 
             //Act
@@ -77,7 +77,7 @@ namespace MontyHallUnitTests
         public void AssignAnnouncersDoorToVariable() //delete test, not testable.
         {
             //Arrange
-            var game = new MontyHallGame(PrizeDoors.two);
+            var game = new MontyHallGame(PrizeDoors.two, new RandomPrizeDoorAssigner());
 
             //Act
             game.AnnouncersDoor();

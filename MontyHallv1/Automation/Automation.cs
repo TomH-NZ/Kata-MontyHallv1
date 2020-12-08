@@ -4,7 +4,7 @@ namespace MontyHallv1.Automation
     {
         // Generate player selected door
         
-        // Create new Monty game with player selected door
+        // Create new Monty game with player selected door and random door
         
         // Generate announcers door
         

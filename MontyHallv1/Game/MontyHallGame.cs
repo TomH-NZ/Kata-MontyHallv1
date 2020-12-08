@@ -10,10 +10,10 @@ namespace MontyHallv1.Game
         public PrizeDoors PlayerSelection { get; private set; }
         public PrizeDoors? AnnouncersSelection { get; set; }
         public Dictionary<PrizeDoors, string> DoorPrizeStorage { get; }
-        
-        private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } = new RandomPrizeDoorAssigner();
 
-        public MontyHallGame(PrizeDoors playerSelection) 
+        private IRandomPrizeDoorAssigner RandomPrizeDoorAssigner { get; } 
+
+        public MontyHallGame(PrizeDoors playerSelection, IRandomPrizeDoorAssigner randomDoor) 
         {
             PlayerSelection = playerSelection;
             DoorPrizeStorage = new Dictionary<PrizeDoors, string>
@@ -22,6 +22,8 @@ namespace MontyHallv1.Game
                 {PrizeDoors.two, "joke"},
                 {PrizeDoors.three, "joke"}
             };
+
+            RandomPrizeDoorAssigner = randomDoor;
         }
         
         public PrizeDoors AnnouncersDoor() 
@@ -43,7 +45,6 @@ namespace MontyHallv1.Game
             var prizeDoor = RandomPrizeDoorAssigner.PrizeDoor();
             
             DoorPrizeStorage[prizeDoor] = "serious";
-            //TODO: how to test this?  Using Moq?
         }
 
         public PrizeDoors ChangePlayerDoor()

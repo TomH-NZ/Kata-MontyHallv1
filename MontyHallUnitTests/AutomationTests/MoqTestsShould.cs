@@ -1,4 +1,5 @@
 using MontyHallv1.Enums;
+using MontyHallv1.Game;
 using MontyHallv1.Interfaces;
 using MontyHallv1.MoqTestFolder;
 using Moq;
@@ -15,19 +16,16 @@ namespace MontyHallUnitTests.AutomationTests
             moqTest.Setup(inputGenerator => inputGenerator.PlayerSelection()).Returns(PrizeDoors.three);
 
             var wrappedTypeInstance = moqTest.Object;
-            //wrappedTypeInstance.PlayerSelection();
-            //wrappedTypeInstance.PlayerSelection();
             
             Assert.Equal(PrizeDoors.three, wrappedTypeInstance.PlayerSelection());
-            //moqTest.Verify(calledProcess => calledProcess.PlayerSelection(), Times.Once); //will fail as the method is called twice.
         }
 
         [Fact]
-        public void TestAdditionCorrectly() // test not working correctly
+        public void TestAdditionCorrectly() 
         {
             //Arrange
             var moqTest = new Mock<IMoqTestPagev1>();
-            moqTest.Setup(x => x.PlusOneAddition(It.IsAny<int>())).Returns(() => 4);
+            moqTest.Setup(x => x.PlusOneAddition(It.IsAny<int>())).Returns(4);
             var moqObject = moqTest.Object;
             
             //Act
@@ -51,6 +49,21 @@ namespace MontyHallUnitTests.AutomationTests
 
             //Assert
             Assert.True(result);
+        }
+
+        [Fact]
+        public void UpdateThePrizeDoorDictionaryWithMoq()
+        {
+            //Arrange
+            var moqRandomDoor = new Mock<IRandomPrizeDoorAssigner>();
+            moqRandomDoor.Setup(randomDoor => randomDoor.PrizeDoor()).Returns(PrizeDoors.three);
+            var gameUnderTest = new MontyHallGame(PrizeDoors.one, moqRandomDoor.Object);
+            
+            //Act
+            gameUnderTest.UpdatePrizeStorage();
+
+            //Assert
+            Assert.Equal("serious", gameUnderTest.DoorPrizeStorage[PrizeDoors.three]);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace MontyHallUnitTests
         {
             //Arrange
             var randomPrizeDoorAssigner= new RandomPrizeDoorAssigner();
-            var montyHallGame = new MontyHallGame(PrizeDoors.one );
+            var montyHallGame = new MontyHallGame(PrizeDoors.one, randomPrizeDoorAssigner);
             
             //Act
             var result = montyHallGame.PlayerSelection;

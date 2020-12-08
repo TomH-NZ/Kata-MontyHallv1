@@ -21,7 +21,7 @@ namespace MontyHallv1.Game
                 
                 isValidUserDoorSelection = Validation.Validation.UserEntryValidator(enteredUserSelection);
             }
-            var montyGame = new MontyHallGame(Validation.Validation.UserInputConversion(enteredUserSelection));
+            var montyGame = new MontyHallGame(Validation.Validation.UserInputConversion(enteredUserSelection), new RandomPrizeDoorAssigner());
             montyGame.UpdatePrizeStorage();
             var announcersChosenDoor = montyGame.AnnouncersDoor();
             
