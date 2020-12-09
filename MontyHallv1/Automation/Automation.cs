@@ -4,7 +4,7 @@ using MontyHallv1.Interfaces;
 
 namespace MontyHallv1.Automation
 {
-    public class Automation // ToDo: Add in logic for x loops.
+    public class Automation
     {
         public Automation(IInputGenerator inputGenerator)
         {
@@ -14,22 +14,29 @@ namespace MontyHallv1.Automation
         private IInputGenerator InputGenerator { get; }
         public void AutomatedGame()
         {
-            var automatedPlayerSelection = InputGenerator.PlayerSelection();
-            var automatedMonty = new MontyHallGame(automatedPlayerSelection, new RandomPrizeDoorAssigner());
-            automatedMonty.UpdatePrizeStorage();
-            automatedMonty.AnnouncersDoor();
-            automatedMonty.ChangePlayerDoor();
-            ChangeDoor.AutomatedStorage.Add(automatedMonty.DoorPrizeStorage[automatedPlayerSelection] == "serious"
-                ? 1 : 0);
+            Console.WriteLine("Please enter a number of cycles to run through:");
+            int.TryParse(Console.ReadLine(), out var programCycles);
+
+            var index = 0;
+            while (index < programCycles)
+            {
+                var automatedPlayerSelection = InputGenerator.PlayerSelection();
+                var automatedMonty = new MontyHallGame(automatedPlayerSelection, new RandomPrizeDoorAssigner());
+                automatedMonty.UpdatePrizeStorage();
+                automatedMonty.AnnouncersDoor();
+                //automatedMonty.ChangePlayerDoor();
+
+                if (automatedMonty.DoorPrizeStorage[automatedPlayerSelection] == "serious")
+                {
+                    ChangeDoor.AutomatedStorage.Add(1);
+                }
+
+                index++;
+            }
+
+            Console.WriteLine($"Not changing doors gave {ChangeDoor.AutomatedStorage.Count} out of {programCycles} serious prizes.");
+
+            
         }
     }
 }
-// TODO: Create new Monty game with player selected door and random door - x
-
-// TODO:Generate announcers door - x
-        
-// TODO:Change player door / do not change player door
-        
-// TODO:Show door prize
-        
-// TODO:Save results to list

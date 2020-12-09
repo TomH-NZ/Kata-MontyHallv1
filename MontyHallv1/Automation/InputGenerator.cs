@@ -6,9 +6,6 @@ namespace MontyHallv1.Automation
 {
     public class InputGenerator : IInputGenerator
     {
-        public string Yes = "yes";
-        public string No = "no";
-
         public PrizeDoors PlayerSelection()
         {
             var selectedDoor = new Random().Next(1, 4) switch

@@ -10,8 +10,9 @@ namespace MontyHallv1
         {
             var newGame = new Automation.Automation(new InputGenerator());
             newGame.AutomatedGame();
+            
+            //var newGame = new UserInterface();
+            //newGame.Game();
         }
     }
 }
-// TODO: Record player selection, prize success
-// TODO: Loop through for 1000 cycles 
