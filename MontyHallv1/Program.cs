@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using MontyHallv1.Automation;
 using MontyHallv1.Game;
 
 namespace MontyHallv1
@@ -8,8 +8,8 @@ namespace MontyHallv1
     {
         public static void Main(string[] args)
         {
-            var newGame = new UserInterface();
-            newGame.Game();
+            var newGame = new Automation.Automation(new InputGenerator());
+            newGame.AutomatedGame();
         }
     }
 }
