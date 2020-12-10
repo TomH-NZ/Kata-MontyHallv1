@@ -24,7 +24,7 @@ namespace MontyHallv1.Automation
                 var automatedMonty = new MontyHallGame(automatedPlayerSelection, new RandomPrizeDoorAssigner());
                 automatedMonty.UpdatePrizeStorage();
                 automatedMonty.AnnouncersDoor();
-                //automatedMonty.ChangePlayerDoor();
+                automatedMonty.ChangePlayerDoor();
 
                 if (automatedMonty.DoorPrizeStorage[automatedPlayerSelection] == "serious")
                 {
@@ -34,7 +34,7 @@ namespace MontyHallv1.Automation
                 index++;
             }
 
-            Console.WriteLine($"Not changing doors gave {ChangeDoor.AutomatedStorage.Count} out of {programCycles} serious prizes.");
+            Console.WriteLine($"Changing doors gave {ChangeDoor.AutomatedStorage.Count} out of {programCycles} serious prizes.");
 
             
         }

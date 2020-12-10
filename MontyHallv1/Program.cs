@@ -16,3 +16,5 @@ namespace MontyHallv1
         }
     }
 }
+
+//Autofac.
