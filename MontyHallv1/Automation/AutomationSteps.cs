@@ -4,9 +4,9 @@ using MontyHallv1.Interfaces;
 
 namespace MontyHallv1.Automation
 {
-    public class Automation
+    public class AutomationSteps
     {
-        public Automation(IInputGenerator inputGenerator)
+        public AutomationSteps(IInputGenerator inputGenerator)
         {
             InputGenerator = inputGenerator;
         }

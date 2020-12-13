@@ -1,6 +1,5 @@
 ﻿using System;
 using MontyHallv1.Automation;
-using MontyHallv1.Game;
 
 namespace MontyHallv1
 {
@@ -8,7 +7,7 @@ namespace MontyHallv1
     {
         public static void Main(string[] args)
         {
-            var newGame = new Automation.Automation(new InputGenerator());
+            var newGame = new AutomationSteps(new InputGenerator());
             newGame.AutomatedGame();
             
             //var newGame = new UserInterface();
